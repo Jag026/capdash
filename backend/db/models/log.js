@@ -3,6 +3,28 @@ const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Log extends Model {
+
+    toSafeObject() {
+      const { id, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = this; // context will be the User instance
+      return { id, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap };
+    }
+
+    static getCurrentUserById(id) {
+      return Log.scope("currentLog").findByPk(id);
+    }
+
+    static async addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }) {
+      const log = await Log.create({
+        asset_a,
+        asset_b,
+        asset_a_price,
+        asset_b_price,
+        asset_a_marketcap,
+        asset_b_marketcap
+      });
+      return await Log.scope('currentLog').findByPk(log.id);
+    }
+
     static associate(models) {
       // define association here
     }
@@ -14,34 +36,48 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       asset_a: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       asset_b: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       asset_a_price: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       asset_b_price: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       asset_a_marketcap: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       asset_b_marketcap: {
-        type: Sequelize.STRING(256),
+        type: DataTypes.STRING,
         allowNull: false,
+      }
+    },
+    {
+      sequelize,
+      modelName: "Log",
+      defaultScope: {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"]
+        }
+      },
+      scopes: {
+        currentLog: {
+        },
       }
     }
   );
+
   Log.associate = function (models) {
     Log.belongsTo(models.User, {
       as: 'user',
