@@ -55,8 +55,6 @@ router.post(
     const strPayload = Buffer.from(payload, 'base64').toString()
     const parsedPayload = JSON.parse(strPayload);
     const userId = parsedPayload["data"].id
-    console.log('-----------------------:')
-    console.log(userId)
     const { asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = req.body;
     const log = await Log.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap, userId });
     
