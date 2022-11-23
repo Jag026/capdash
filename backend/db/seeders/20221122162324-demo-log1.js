@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Logs', [
       {
-        userId: users[0].id,
+        userId: 1,
         asset_a: 'SHTY',
         asset_b: 'XYZ',
         asset_a_price: '100',
@@ -13,7 +13,7 @@ module.exports = {
         asset_b_marketcap: '5000000',
       },
       {
-        userId: users[0].id,
+        userId: 1,
         asset_a: 'AA',
         asset_b: 'ZZZ',
         asset_a_price: '2312',

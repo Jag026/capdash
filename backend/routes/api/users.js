@@ -1,7 +1,8 @@
 const express = require('express');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, fetchUserId } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { Log } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -42,5 +43,28 @@ router.post(
     });
   }
 );
+
+
+// Add Log
+router.post(
+  '/add-log',
+  async (req, res) => {
+    const { token } = req.cookies;
+    const splitJwt = token.split('.');
+    const payload = splitJwt[1];
+    const strPayload = Buffer.from(payload, 'base64').toString()
+    const parsedPayload = JSON.parse(strPayload);
+    const userId = parsedPayload["data"].id
+    console.log('-----------------------:')
+    console.log(userId)
+    const { asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = req.body;
+    const log = await Log.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap, userId });
+    
+    return res.json({
+      log
+    });
+  }
+);
+
 
 module.exports = router;

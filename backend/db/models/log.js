@@ -5,22 +5,24 @@ module.exports = (sequelize, DataTypes) => {
   class Log extends Model {
 
     toSafeObject() {
-      const { id, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = this; // context will be the User instance
-      return { id, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap };
+      const { id, userId, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = this; // context will be the User instance
+      return { id, userId, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap };
     }
 
-    static getCurrentUserById(id) {
+    static getCurrentLogById(id) {
       return Log.scope("currentLog").findByPk(id);
     }
 
-    static async addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }) {
+    static async addLog({ userId, asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap, }) {
+
       const log = await Log.create({
+        userId: userId,
         asset_a,
         asset_b,
         asset_a_price,
         asset_b_price,
         asset_a_marketcap,
-        asset_b_marketcap
+        asset_b_marketcap,
       });
       return await Log.scope('currentLog').findByPk(log.id);
     }
