@@ -22,7 +22,6 @@ const getAllCryptoAssetNames = (date) => {
           const splitStr = nameStr.split("X:")
           nameArr.push(splitStr[1]);
       })
-     // console.log(nameArr)
       return nameArr;
   })
 

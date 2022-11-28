@@ -70,12 +70,16 @@ router.get(
 );
 
 router.get(
-  '/test-data',
+  '/fetch-crypto-asset-names',
   async (req, res) => {
-    const assets = await getAllCryptoAssetNames('2022-11-22')
-    console.log(assets)
-    res.send(assets);
+    const todaysDate = new Date()
+    const yesterday = todaysDate;
+    yesterday.setDate(yesterday.getDate() - 1)
+    const formattedDate = yesterday.toISOString().slice(0, -14)
+    const assets = await getAllCryptoAssetNames(formattedDate)
+    return res.json({assets});
   }
 );
+
 
 module.exports = router;
