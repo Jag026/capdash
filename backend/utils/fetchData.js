@@ -70,10 +70,9 @@ const getCryptoMarketCap = (symbol) => {
     return price;
 }
 
-
-const getStockPrice = (symbol, date) => {
-    const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/range/1/day/' + date + '/' + date + '?adjusted=true&sort=asc&limit=120&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c';
-                
+// fetches the LAST CLOSE price of the stock
+const getStockPrice = (symbol) => {
+    const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/prev?adjusted=true&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
     const price = fetch(
   url,
   {

@@ -109,8 +109,8 @@ router.post(
 router.post(
     '/fetch-stock-price',
   async (req, res, next) => {
-    const { symbol, date } = req.body;
-    const price = await getStockPrice(symbol, date)
+    const { symbol } = req.body;
+    const price = await getStockPrice(symbol)
     return res.json({
       price
     });
