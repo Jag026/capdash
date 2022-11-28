@@ -4,7 +4,9 @@ const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { CMC_API_KEY, polygonApiKey } = require('../../config');
+const fetch = require('node-fetch');
+const { getAllCryptoAssetNames } = require('../../utils/fetchData')
 const router = express.Router();
 
 
@@ -64,6 +66,15 @@ router.get(
         user: user.toSafeObject()
       });
     } else return res.json({});
+  }
+);
+
+router.get(
+  '/test-data',
+  async (req, res) => {
+    const assets = await getAllCryptoAssetNames('2022-11-22')
+    console.log(assets)
+    res.send(assets);
   }
 );
 
