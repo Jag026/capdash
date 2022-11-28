@@ -1,4 +1,4 @@
-const { polygonApiKey } = require('../config');
+const { polygonApiKey, cmcApiKey } = require('../config');
 const fetch = require('node-fetch');
 
 const getAllCryptoAssetNames = (date) => {
@@ -36,7 +36,7 @@ const getCryptoPrice = (symbol) => {
   {
     method: "GET",
     headers: {
-      "X-CMC_PRO_API_KEY": "1b02cf34-2998-4adc-8c45-c43ac970e440",
+      "X-CMC_PRO_API_KEY": cmcApiKey,
       "Content-Type": "application/json",
     },
   }
@@ -57,7 +57,7 @@ const getCryptoMarketCap = (symbol) => {
   {
     method: "GET",
     headers: {
-      "X-CMC_PRO_API_KEY": "1b02cf34-2998-4adc-8c45-c43ac970e440",
+      "X-CMC_PRO_API_KEY": cmcApiKey,
       "Content-Type": "application/json",
     },
   }
@@ -72,13 +72,13 @@ const getCryptoMarketCap = (symbol) => {
 
 // fetches the LAST CLOSE price of the stock
 const getStockPrice = (symbol) => {
-    const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/prev?adjusted=true&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+    const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/prev?adjusted=true'
     const price = fetch(
   url,
   {
     method: "GET",
     headers: {
-      "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+      "Authorization": "Bearer " + polygonApiKey,
       "Content-Type": "application/json",
     },
   }
@@ -92,14 +92,14 @@ const getStockPrice = (symbol) => {
 }
 
 const getStockMarketCap = (symbol) => {
-  const url = 'https://api.polygon.io/v3/reference/tickers/' + symbol + '?apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+  const url = 'https://api.polygon.io/v3/reference/tickers/' + symbol;
                 
   const price = fetch(
     url,
     {
       method: "GET",
       headers: {
-        "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+        "Authorization": "Bearer " + polygonApiKey,
         "Content-Type": "application/json",
       },
     }
@@ -112,14 +112,14 @@ const getStockMarketCap = (symbol) => {
 }
 
 const getStockAssetNames = (date) => {
-    const url = 'https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/' + date + '?adjusted=true&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+  const url = 'https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/' + date;
                 
   const arr = fetch(
   url,
   {
     method: "GET",
     headers: {
-      "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+      "Authorization": "Bearer " + polygonApiKey,
       "Content-Type": "application/json",
     },
   }
