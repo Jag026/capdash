@@ -6,7 +6,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { CMC_API_KEY, polygonApiKey } = require('../../config');
 const fetch = require('node-fetch');
-const { getAllCryptoAssetNames, getCryptoPrice } = require('../../utils/fetchData')
+const { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap } = require('../../utils/fetchData')
 const router = express.Router();
 
 
@@ -89,6 +89,18 @@ router.post(
     const price = await getCryptoPrice(symbol)
     return res.json({
       price
+    });
+  }
+);
+
+// Get market cap of crypto asset
+router.post(
+    '/fetch-crypto-marketcap',
+  async (req, res, next) => {
+    const { symbol } = req.body;
+    const marketcap = await getCryptoMarketCap(symbol)
+    return res.json({
+      marketcap
     });
   }
 );

@@ -49,4 +49,25 @@ const getCryptoPrice = (symbol) => {
     return price;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoPrice };
+const getCryptoMarketCap = (symbol) => {
+    const url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=' + symbol;
+                
+    const price = fetch(
+  url,
+  {
+    method: "GET",
+    headers: {
+      "X-CMC_PRO_API_KEY": "1b02cf34-2998-4adc-8c45-c43ac970e440",
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((response) => response.json())
+  .then((data) => {
+      const newData = data;
+      return Object.values(newData)[1][symbol][0]['quote']['USD'].market_cap
+  });
+    return price;
+}
+
+module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap };
