@@ -6,7 +6,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { CMC_API_KEY, polygonApiKey } = require('../../config');
 const fetch = require('node-fetch');
-const { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap } = require('../../utils/fetchData')
+const { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap } = require('../../utils/fetchData')
 const router = express.Router();
 
 
@@ -99,6 +99,30 @@ router.post(
   async (req, res, next) => {
     const { symbol } = req.body;
     const marketcap = await getCryptoMarketCap(symbol)
+    return res.json({
+      marketcap
+    });
+  }
+);
+
+// Get price of stock asset
+router.post(
+    '/fetch-stock-price',
+  async (req, res, next) => {
+    const { symbol, date } = req.body;
+    const price = await getStockPrice(symbol, date)
+    return res.json({
+      price
+    });
+  }
+);
+
+// Get the market cap of stock asset
+router.post(
+    '/fetch-stock-marketcap',
+  async (req, res, next) => {
+    const { symbol } = req.body;
+    const marketcap = await getStockMarketCap(symbol)
     return res.json({
       marketcap
     });

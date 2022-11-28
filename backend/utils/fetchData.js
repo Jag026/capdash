@@ -70,4 +70,46 @@ const getCryptoMarketCap = (symbol) => {
     return price;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap };
+
+const getStockPrice = (symbol, date) => {
+    const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/range/1/day/' + date + '/' + date + '?adjusted=true&sort=asc&limit=120&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c';
+                
+    const price = fetch(
+  url,
+  {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((response) => response.json())
+  .then((data) => {
+      return data['results'][0]['c']
+  });
+
+  return price
+}
+
+const getStockMarketCap = (symbol) => {
+  const url = 'https://api.polygon.io/v3/reference/tickers/' + symbol + '?apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+                
+  const price = fetch(
+    url,
+    {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      return data.results.market_cap
+    });
+  return price;
+}
+
+module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap };
