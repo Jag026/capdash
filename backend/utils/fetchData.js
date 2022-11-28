@@ -111,4 +111,34 @@ const getStockMarketCap = (symbol) => {
   return price;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap };
+const getStockAssetNames = (date) => {
+    const url = 'https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/' + date + '?adjusted=true&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+                
+  const arr = fetch(
+  url,
+  {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c",
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((response) => response.json())
+  .then((data) => {
+      let count = 0;
+      const nameArr = [];
+       data['results'].forEach((result) => {
+        if (count < 150 ) {
+          const nameStr = result["T"];
+          nameArr.push(nameStr);
+         count++
+       }
+       })
+      console.log(nameArr);
+      return nameArr
+  });
+  return arr;
+}
+
+module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap, getStockAssetNames };
