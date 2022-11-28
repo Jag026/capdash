@@ -2,7 +2,7 @@ const { polygonApiKey } = require('../config');
 const fetch = require('node-fetch');
 
 const getAllCryptoAssetNames = (date) => {
-    const url = 'https://api.polygon.io/v2/aggs/grouped/locale/global/market/crypto/' + date + '?adjusted=true&apiKey=wAWqnRBqf9R7cVMwZaZb_r5kt4psQU6c'
+    const url = 'https://api.polygon.io/v2/aggs/grouped/locale/global/market/crypto/' + date + '?adjusted=true'
     
     const arr = fetch(
   url,
