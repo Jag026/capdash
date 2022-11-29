@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const SET_STOCK_NAMES = 'session/setStockNames';
 
 const setUser = (user) => {
   return {
@@ -13,6 +14,13 @@ const setUser = (user) => {
 const removeUser = () => {
   return {
     type: REMOVE_USER,
+  };
+};
+
+const setStockNames = (stockNames) => {
+  return {
+      type: SET_STOCK_NAMES,
+      payload: stockNames,
   };
 };
 
@@ -30,7 +38,10 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-const initialState = { user: null };
+const initialState = {
+    user: null,
+    stockNames: null,
+};
 
 const sessionReducer = (state = initialState, action) => {
   let newState;
@@ -42,6 +53,10 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_USER:
       newState = Object.assign({}, state);
       newState.user = null;
+      return newState;
+    case SET_STOCK_NAMES:
+      newState = Object.assign({}, state);
+      newState.stockNames = action.payload;
       return newState;
     default:
       return state;
@@ -75,6 +90,19 @@ export const logout = () => async (dispatch) => {
     method: 'DELETE',
   });
   dispatch(removeUser());
+  return response;
+};
+
+export const setNamesStocks = () => async (dispatch) => {
+  const date = '2022-11-21'
+  const response = await csrfFetch('/api/session/fetch-stock-asset-names', {
+    method: 'POST',
+    body: JSON.stringify({
+      date
+    }),
+  });
+  const data = await response.json();
+  dispatch(setStockNames(data.stockSymbols));
   return response;
 };
 
