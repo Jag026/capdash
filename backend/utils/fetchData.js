@@ -135,7 +135,6 @@ const getStockAssetNames = (date) => {
          count++
        }
        })
-      console.log(nameArr);
       return nameArr
   });
   return arr;
