@@ -28,10 +28,11 @@ const getAllCryptoAssetNames = (date) => {
     return arr
 }
 
-const getCryptoPrice = (symbol) => {
+// Returns an array that contains the price and marketcap of a specific asset, [price, marketcap]
+const getCryptoData = (symbol) => {
     const url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=' + symbol;
                 
-    const price = fetch(
+    const assetData = fetch(
   url,
   {
     method: "GET",
@@ -43,31 +44,14 @@ const getCryptoPrice = (symbol) => {
 )
   .then((response) => response.json())
   .then((data) => {
+      console.log(JSON.stringify(data));
       const newData = data;
-      return Object.values(newData)[1][symbol][0]['quote']['USD'].price
+      const dataArr = []
+      dataArr[0] = Object.values(newData)[1][symbol][0]['quote']['USD'].price
+      dataArr[1] = Object.values(newData)[1][symbol][0]['quote']['USD'].market_cap
+      return dataArr
   });
-    return price;
-}
-
-const getCryptoMarketCap = (symbol) => {
-    const url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=' + symbol;
-                
-    const price = fetch(
-  url,
-  {
-    method: "GET",
-    headers: {
-      "X-CMC_PRO_API_KEY": cmcApiKey,
-      "Content-Type": "application/json",
-    },
-  }
-)
-  .then((response) => response.json())
-  .then((data) => {
-      const newData = data;
-      return Object.values(newData)[1][symbol][0]['quote']['USD'].market_cap
-  });
-    return price;
+    return assetData;
 }
 
 // fetches the LAST CLOSE price of the stock
@@ -140,4 +124,4 @@ const getStockAssetNames = (date) => {
   return arr;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap, getStockAssetNames };
+module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames };
