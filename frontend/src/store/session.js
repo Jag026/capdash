@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 const SET_CRYPTO_NAMES = 'session/setCryptoNames';
+const SET_STOCK_NAMES = 'session/setStockNames';
 
 const setUser = (user) => {
   return {
@@ -24,6 +25,13 @@ const setCryptos = (cryptos) => {
   };
 };
 
+const setStocks = (stocks) => {
+  return {
+    type: SET_STOCK_NAMES,
+    payload: stocks,
+  };
+};
+
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
   const response = await csrfFetch('/api/session', {
@@ -41,6 +49,7 @@ export const login = (user) => async (dispatch) => {
 const initialState = {
   user: null,
   cryptos: null,
+  stocks: null,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -57,6 +66,10 @@ const sessionReducer = (state = initialState, action) => {
     case SET_CRYPTO_NAMES:
       newState = Object.assign({}, state);
       newState.cryptos = action.payload;
+      return newState;
+    case SET_STOCK_NAMES:
+      newState = Object.assign({}, state);
+      newState.stocks = action.payload;
       return newState;
     default:
       return state;
@@ -94,11 +107,17 @@ export const logout = () => async (dispatch) => {
 };
 
 export const getCryptoNames = () => async dispatch => {
-  const response = await csrfFetch('/api/session//fetch-crypto-asset-names');
+  const response = await csrfFetch('/api/session/fetch-crypto-asset-names');
   const data = await response.json();
   dispatch(setCryptos(data));
-  console.log(data)
-  return response;
+  return data;
+};
+
+export const getStockNames = () => async dispatch => {
+  const response = await csrfFetch('/api/session/fetch-stock-asset-names');
+  const data = await response.json();
+  dispatch(setStocks(data));
+  return data;
 };
 
 export default sessionReducer;

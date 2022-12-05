@@ -116,11 +116,10 @@ router.post(
   }
 );
 
-router.post(
+router.get(
   '/fetch-stock-asset-names',
   async (req, res, next) => {
-    const { date } = req.body;
-    const stockSymbols = await getStockAssetNames(date)
+    const stockSymbols = await getStockAssetNames('2022-11-30')
     return res.json({
       stockSymbols
     });
