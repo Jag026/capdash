@@ -16,7 +16,9 @@ function Home() {
   const [assetA, setAssetAState] = useState('');
   const [marketCapA, setmarketCapAState] = useState('');
   
-  let cryptoNameArr = []
+  let cryptoNameArr = cryptoData.map(crypto => {
+    return crypto.symbol
+  })
   let stockNameArr = []
   let assetB = "";
   let newPrice = 0;
@@ -58,7 +60,6 @@ function Home() {
         <br></br>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                name = name.split('USD')[0]
                 return <button onClick={e => { e.preventDefault(); setAssetA(name) } }>{name}</button> 
                 }))
           }
