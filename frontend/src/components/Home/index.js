@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 function Home() {
@@ -15,32 +15,27 @@ function Home() {
   
   const [assetA, setAssetAState] = useState('');
   const [marketCapA, setmarketCapAState] = useState('');
-  
-  let cryptoNameArr = cryptoData.map(crypto => {
-    return crypto.symbol
-  })
+  const [cryptoNameArr, setCryptoNameArr] = useState([]);
+
+
   let stockNameArr = []
   let assetB = "";
   let newPrice = 0;
-
-  if (cryptos) {
-      cryptoNameArr = cryptos.assets;
-  }
     
   if (stocks) {
       stockNameArr = stocks.stockSymbols;
   } 
 
-  const setCryptos = (e) => {
+  const SetCryptos = (e) => {
     e.preventDefault();
-      dispatch(sessionActions.getCryptoNames()); 
-      stocks.stockSymbols = [];
+    setCryptoNameArr(cryptoData.map(crypto => { return crypto.symbol}))
+    stocks.stockSymbols = [];
   }
     
   const setStocks = (e) => {
     e.preventDefault();
       dispatch(sessionActions.getStockNames()); 
-      cryptos.assets = [];
+      setCryptoNameArr([])
   }  
 
   const setAssetA = (symbol) => {
@@ -55,7 +50,7 @@ function Home() {
       <div>
         <p>Select An Asset Class</p>
         <button onClick={setStocks}>Stocks</button>
-        <button onClick={setCryptos}>Cryptos</button>
+        <button onClick={SetCryptos}>Cryptos</button>
         <br></br>
         <br></br>
           {cryptoNameArr && 
