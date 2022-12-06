@@ -4,6 +4,7 @@ const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 const SET_CRYPTO_NAMES = 'session/setCryptoNames';
 const SET_STOCK_NAMES = 'session/setStockNames';
+const SET_CRYPTO_DATA = 'session/setCryptoData';
 
 const setUser = (user) => {
   return {
@@ -22,6 +23,13 @@ const setCryptos = (cryptos) => {
   return {
     type: SET_CRYPTO_NAMES,
     payload: cryptos,
+  };
+};
+
+const setCryptoData = (cryptoData) => {
+  return {
+    type: SET_CRYPTO_DATA,
+    payload: cryptoData,
   };
 };
 
@@ -50,6 +58,7 @@ const initialState = {
   user: null,
   cryptos: null,
   stocks: null,
+  cryptoData: null,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -70,6 +79,10 @@ const sessionReducer = (state = initialState, action) => {
     case SET_STOCK_NAMES:
       newState = Object.assign({}, state);
       newState.stocks = action.payload;
+      return newState;
+    case SET_CRYPTO_DATA:
+      newState = Object.assign({}, state);
+      newState.cryptoData = action.payload;
       return newState;
     default:
       return state;
@@ -111,6 +124,13 @@ export const getCryptoNames = () => async dispatch => {
   const data = await response.json();
   dispatch(setCryptos(data));
   return data;
+};
+
+export const getAllCryptoData= () => async dispatch => {
+  const response = await csrfFetch('/api/session/fetch-all-crypto-data');
+  const data = await response.json();
+  dispatch(setCryptoData(data.cryptoData["data"])); 
+  return data.cryptoData["data"];
 };
 
 export const getStockNames = () => async dispatch => {

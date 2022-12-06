@@ -8,9 +8,18 @@ function Home() {
 
   let cryptos = useSelector(state => state.session.cryptos);
   let stocks = useSelector(state => state.session.stocks);
+  let cryptoData = useSelector(state => state.session.cryptoData);
+    if (!cryptoData) {
+      dispatch(sessionActions.getAllCryptoData())
+    }
+  
+  const [assetA, setAssetAState] = useState('');
+  const [marketCapA, setmarketCapAState] = useState('');
   
   let cryptoNameArr = []
   let stockNameArr = []
+  let assetB = "";
+  let newPrice = 0;
 
   if (cryptos) {
       cryptoNameArr = cryptos.assets;
@@ -18,8 +27,8 @@ function Home() {
     
   if (stocks) {
       stockNameArr = stocks.stockSymbols;
-  }  
-  
+  } 
+
   const setCryptos = (e) => {
     e.preventDefault();
       dispatch(sessionActions.getCryptoNames()); 
@@ -31,7 +40,14 @@ function Home() {
       dispatch(sessionActions.getStockNames()); 
       cryptos.assets = [];
   }  
+
+  const setAssetA = (symbol) => {
+    let asset = cryptoData.filter(crypto => crypto.symbol === symbol)
+    setAssetAState(asset[0].symbol);
     
+  }  
+    
+
   return (
     <div>
       <div>
@@ -43,17 +59,19 @@ function Home() {
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
                 name = name.split('USD')[0]
-                return <button>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setAssetA(name) } }>{name}</button> 
                 }))
           }
         <br></br>
         <br></br>
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setAssetA(name) } }>{name}</button>  
                 }))
           }
       </div>
+
+      <p>If asset {assetA} has a marketcap of: {marketCapA} {assetB} marketcap, it's price would be: {newPrice}: </p>
     </div>
   );
 }

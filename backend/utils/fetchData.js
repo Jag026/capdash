@@ -54,6 +54,27 @@ const getCryptoData = (symbol) => {
     return assetData;
 }
 
+const getAllCryptoData = () => {
+    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+                
+    const assetData = fetch(
+  url,
+  {
+    method: "GET",
+    headers: {
+      "X-CMC_PRO_API_KEY": cmcApiKey,
+      "Content-Type": "application/json",
+    },
+  }
+)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(JSON.stringify(data));
+    return data;
+  });
+    return assetData;
+}
+
 // fetches the LAST CLOSE price of the stock
 const getStockPrice = (symbol) => {
     const url = 'https://api.polygon.io/v2/aggs/ticker/' + symbol + '/prev?adjusted=true'
@@ -124,4 +145,4 @@ const getStockAssetNames = (date) => {
   return arr;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames };
+module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData };
