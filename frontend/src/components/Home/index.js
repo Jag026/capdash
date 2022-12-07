@@ -24,8 +24,6 @@ function Home() {
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
 
-  let newPrice = 0;
-
   const SetCryptos = (e) => {
     e.preventDefault();
     setCryptoNameArr(cryptoData.map(crypto => { return crypto.symbol}))
@@ -47,6 +45,7 @@ function Home() {
     }
   }  
     
+  //fetches marketcap and price from crypto data
   const fetchCryptoMcAndPrice = (data, symbol) => {
     let arr = [];
     let asset = data.filter(asset => asset.symbol === symbol)
@@ -55,6 +54,15 @@ function Home() {
     return arr;
   }
 
+  const fetchStockMcAndPrice = (data, symbol) => {
+    let arr = [];
+    let asset = data.filter(asset => asset.symbol === symbol)[0]
+    arr[0] = asset.marketcap
+    arr[1] = asset.price
+    return arr;
+  }
+
+  //sets data points for bottom text. Takes in an integer array [marketcap, price]
   const setDataPoints = (dataArr) => {
     const market_cap = dataArr[0];
     const price = dataArr[1];
@@ -67,6 +75,7 @@ function Home() {
     }
   }
 
+  //Resets all displayed data points 
   const ResetDataPoints = () => {
       setmarketCapBState("")
       setPriceBState("")
@@ -93,7 +102,7 @@ function Home() {
         <br></br>
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); } }>{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setDataPoints(fetchStockMcAndPrice(stockData.stockData, name))} }>{name}</button>  
                 }))
           }
       </div>
