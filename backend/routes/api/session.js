@@ -5,7 +5,7 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { CMC_API_KEY, polygonApiKey } = require('../../config');
-const { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData } = require('../../utils/fetchData')
+const { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData, getStockData } = require('../../utils/fetchData')
 const router = express.Router();
 
 
@@ -130,9 +130,19 @@ router.get(
   '/fetch-all-crypto-data',
   async (req, res, next) => {
     const cryptoData = await getAllCryptoData();
-    console.log(cryptoData);
     return res.json({
       cryptoData
+    });
+  }
+);
+
+router.get(
+  '/fetch-stock-data',
+  async (req, res, next) => {
+    const stockData = await getStockData();
+    console.log(stockData);
+    return res.json({
+      stockData
     });
   }
 );

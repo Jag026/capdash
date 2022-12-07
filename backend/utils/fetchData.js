@@ -1,5 +1,6 @@
 const { polygonApiKey, cmcApiKey } = require('../config');
 const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 
 const getAllCryptoAssetNames = (date) => {
     const url = 'https://api.polygon.io/v2/aggs/grouped/locale/global/market/crypto/' + date + '?adjusted=true'
@@ -24,7 +25,6 @@ const getAllCryptoAssetNames = (date) => {
       })
       return nameArr;
   })
-
     return arr
 }
 
@@ -145,4 +145,41 @@ const getStockAssetNames = (date) => {
   return arr;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData };
+const getStockData = async () => {
+  // get html text from reddit
+  const response = await fetch('https://companiesmarketcap.com/');
+  // using await to ensure that the promise resolves
+  const body = await response.text();
+
+  // parse the html text and extract titles
+  const $ = cheerio.load(body);
+  const titleList = [];
+    
+  // using CSS selector  
+    $('tbody').each((i, title) => {
+    const titleNode = $(title);
+    const titleText = titleNode.text();
+    // console.log(titleText);
+    titleList.push(titleText)
+  });
+
+    let newArr = JSON.stringify(titleList).split("\\n").filter(ele => ele !== '').filter(ele => ele !== ' ').filter(ele => ele !== '["').filter(ele => ele !== '  ');
+    let objArr = []
+    let i = 0;
+
+    while (i < newArr.length) {
+        objArr.push({
+            'name': newArr[i + 1],
+            'symbol': newArr[i + 2],
+            'marketcap': newArr[i + 3],
+            'price': newArr[i + 4],
+            'today': newArr[i + 5],
+            'country': newArr[i + 6]
+        })
+        i += 7;
+    }
+console.log(objArr)
+return objArr
+};
+
+module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData, getStockData };
