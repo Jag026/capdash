@@ -40,7 +40,11 @@ function Home() {
 
   const setAsset = (data, symbol) => {
     let asset = data.filter(asset => asset.symbol === symbol)
-    setAssetAState(asset[0].symbol);
+    if (assetA) {
+      setAssetBState(asset[0].symbol);
+    } else {
+      setAssetAState(asset[0].symbol);
+    }
   }  
     
   const fetchCryptoMcAndPrice = (data, symbol) => {
@@ -62,6 +66,16 @@ function Home() {
       setPriceAState(price)
     }
   }
+
+  const ResetDataPoints = () => {
+      setmarketCapBState("")
+      setPriceBState("")
+      setmarketCapAState("")
+      setPriceAState("")
+      setAssetBState("");
+      setAssetAState("");
+  }
+    
   return (
     <div>
       <div>
@@ -84,7 +98,8 @@ function Home() {
           }
       </div>
 
-      <p>If asset {assetA} has a marketcap of: {marketCapA} and a price of {priceA} ------ {assetB} marketcap, it's price would be: {newPrice}: </p>
+      <p>If asset {assetA} has a marketcap of: {marketCapA} and a price of {priceA} ------ {assetB} marketcap {marketCapB}: {priceB} </p>
+      <button onClick={ResetDataPoints}>Reset</button>
     </div>
   );
 }
