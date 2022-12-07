@@ -1,5 +1,6 @@
 const { polygonApiKey, cmcApiKey } = require('../config');
 const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 
 const getAllCryptoAssetNames = (date) => {
     const url = 'https://api.polygon.io/v2/aggs/grouped/locale/global/market/crypto/' + date + '?adjusted=true'
@@ -24,14 +25,14 @@ const getAllCryptoAssetNames = (date) => {
       })
       return nameArr;
   })
-
     return arr
 }
 
-const getCryptoPrice = (symbol) => {
+// Returns an array that contains the price and marketcap of a specific asset, [price, marketcap]
+const getCryptoData = (symbol) => {
     const url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=' + symbol;
                 
-    const price = fetch(
+    const assetData = fetch(
   url,
   {
     method: "GET",
@@ -43,16 +44,20 @@ const getCryptoPrice = (symbol) => {
 )
   .then((response) => response.json())
   .then((data) => {
+      console.log(JSON.stringify(data));
       const newData = data;
-      return Object.values(newData)[1][symbol][0]['quote']['USD'].price
+      const dataArr = []
+      dataArr[0] = Object.values(newData)[1][symbol][0]['quote']['USD'].price
+      dataArr[1] = Object.values(newData)[1][symbol][0]['quote']['USD'].market_cap
+      return dataArr
   });
-    return price;
+    return assetData;
 }
 
-const getCryptoMarketCap = (symbol) => {
-    const url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=' + symbol;
+const getAllCryptoData = () => {
+    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
                 
-    const price = fetch(
+    const assetData = fetch(
   url,
   {
     method: "GET",
@@ -64,10 +69,10 @@ const getCryptoMarketCap = (symbol) => {
 )
   .then((response) => response.json())
   .then((data) => {
-      const newData = data;
-      return Object.values(newData)[1][symbol][0]['quote']['USD'].market_cap
+    console.log(JSON.stringify(data));
+    return data;
   });
-    return price;
+    return assetData;
 }
 
 // fetches the LAST CLOSE price of the stock
@@ -140,4 +145,40 @@ const getStockAssetNames = (date) => {
   return arr;
 }
 
-module.exports = { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap, getStockAssetNames };
+const getStockData = async () => {
+  // get html text from reddit
+  const response = await fetch('https://companiesmarketcap.com/');
+  // using await to ensure that the promise resolves
+  const body = await response.text();
+
+  // parse the html text and extract titles
+  const $ = cheerio.load(body);
+  const titleList = [];
+    
+  // using CSS selector  
+    $('tbody').each((i, title) => {
+    const titleNode = $(title);
+    const titleText = titleNode.text();
+    // console.log(titleText);
+    titleList.push(titleText)
+  });
+
+    let newArr = JSON.stringify(titleList).split("\\n").filter(ele => ele !== '').filter(ele => ele !== ' ').filter(ele => ele !== '["').filter(ele => ele !== '  ');
+    let objArr = []
+    let i = 0;
+
+    while (i < newArr.length) {
+        objArr.push({
+            'name': newArr[i + 1],
+            'symbol': newArr[i + 2],
+            'marketcap': newArr[i + 3],
+            'price': newArr[i + 4],
+            'today': newArr[i + 5],
+            'country': newArr[i + 6]
+        })
+        i += 7;
+    }
+return objArr
+};
+
+module.exports = { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData, getStockData };

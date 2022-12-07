@@ -5,7 +5,7 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { CMC_API_KEY, polygonApiKey } = require('../../config');
-const { getAllCryptoAssetNames, getCryptoPrice, getCryptoMarketCap, getStockPrice, getStockMarketCap, getStockAssetNames } = require('../../utils/fetchData')
+const { getAllCryptoAssetNames, getCryptoData, getStockPrice, getStockMarketCap, getStockAssetNames, getAllCryptoData, getStockData } = require('../../utils/fetchData')
 const router = express.Router();
 
 
@@ -80,24 +80,12 @@ router.get(
   }
 );
 
-// Get price of crypto asset
-router.post(
-    '/fetch-crypto-price',
-  async (req, res, next) => {
-    const { symbol } = req.body;
-    const price = await getCryptoPrice(symbol)
-    return res.json({
-      price
-    });
-  }
-);
-
 // Get market cap of crypto asset
 router.post(
-    '/fetch-crypto-marketcap',
+    '/fetch-crypto-data',
   async (req, res, next) => {
     const { symbol } = req.body;
-    const marketcap = await getCryptoMarketCap(symbol)
+    const marketcap = await getCryptoData(symbol)
     return res.json({
       marketcap
     });
@@ -128,13 +116,33 @@ router.post(
   }
 );
 
-router.post(
+router.get(
   '/fetch-stock-asset-names',
   async (req, res, next) => {
-    const { date } = req.body;
-    const stockSymbols = await getStockAssetNames(date)
+    const stockSymbols = await getStockAssetNames('2022-11-30')
     return res.json({
       stockSymbols
+    });
+  }
+);
+
+router.get(
+  '/fetch-all-crypto-data',
+  async (req, res, next) => {
+    const cryptoData = await getAllCryptoData();
+    return res.json({
+      cryptoData
+    });
+  }
+);
+
+router.get(
+  '/fetch-stock-data',
+  async (req, res, next) => {
+    const stockData = await getStockData();
+    console.log(stockData);
+    return res.json({
+      stockData
     });
   }
 );
