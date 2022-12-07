@@ -6,40 +6,37 @@ import { Redirect } from 'react-router-dom';
 function Home() {
   const dispatch = useDispatch();
 
-  let cryptos = useSelector(state => state.session.cryptos);
-  let stocks = useSelector(state => state.session.stocks);
   let cryptoData = useSelector(state => state.session.cryptoData);
     if (!cryptoData) {
       dispatch(sessionActions.getAllCryptoData())
+    }
+    let stockData = useSelector(state => state.session.stockData);
+    if (!stockData) {
+      dispatch(sessionActions.getStockData())
     }
   
   const [assetA, setAssetAState] = useState('');
   const [marketCapA, setmarketCapAState] = useState('');
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
+  const [stockNameArr, setStockNameArr] = useState([]);
 
-
-  let stockNameArr = []
   let assetB = "";
   let newPrice = 0;
-    
-  if (stocks) {
-      stockNameArr = stocks.stockSymbols;
-  } 
 
   const SetCryptos = (e) => {
     e.preventDefault();
     setCryptoNameArr(cryptoData.map(crypto => { return crypto.symbol}))
-    stocks.stockSymbols = [];
+    setStockNameArr([])
   }
     
   const setStocks = (e) => {
     e.preventDefault();
-      dispatch(sessionActions.getStockNames()); 
-      setCryptoNameArr([])
+    setStockNameArr(stockData.stockData.map(crypto => { return crypto.symbol}))
+    setCryptoNameArr([])
   }  
 
-  const setAssetA = (symbol) => {
-    let asset = cryptoData.filter(crypto => crypto.symbol === symbol)
+  const setAsset = (data, symbol) => {
+    let asset = data.filter(asset => asset.symbol === symbol)
     setAssetAState(asset[0].symbol);
     
   }  
@@ -55,14 +52,14 @@ function Home() {
         <br></br>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAssetA(name) } }>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setAsset(cryptoData, name) } }>{name}</button> 
                 }))
           }
         <br></br>
         <br></br>
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAssetA(name) } }>{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name) } }>{name}</button>  
                 }))
           }
       </div>

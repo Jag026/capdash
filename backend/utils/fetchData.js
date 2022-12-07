@@ -178,7 +178,6 @@ const getStockData = async () => {
         })
         i += 7;
     }
-console.log(objArr)
 return objArr
 };
 
