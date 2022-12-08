@@ -21,6 +21,7 @@ function Home() {
   const [marketCapB, setmarketCapBState] = useState('');
   const [priceA, setPriceAState] = useState('');
   const [priceB, setPriceBState] = useState('');
+  const [newPrice, setNewPrice] = useState('');
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
 
@@ -83,8 +84,19 @@ function Home() {
       setPriceAState("")
       setAssetBState("");
       setAssetAState("");
+      setNewPrice("");
   }
     
+  const pricePrediction = (priceA, marketcapA, marketcapB) => {
+    if (assetA) {
+      setNewPrice("")
+      const circulatingSupply = marketcapA / priceA;
+      const newPrice = marketcapB / circulatingSupply;
+      setNewPrice(newPrice);
+    }
+    return;
+  }
+
   return (
     <div>
       <div>
@@ -95,7 +107,7 @@ function Home() {
         <br></br>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(cryptoData, name); setDataPoints(fetchCryptoMcAndPrice(cryptoData, name))} }>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setAsset(cryptoData, name); setDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); pricePrediction(priceA, marketCapA, marketCapB) } }>{name}</button> 
                 }))
           }
         <br></br>
@@ -107,7 +119,11 @@ function Home() {
           }
       </div>
 
-      <p>If asset {assetA} has a marketcap of: {marketCapA} and a price of {priceA} ------ {assetB} marketcap {marketCapB}: {priceB} </p>
+      <p>{assetA} currently has a price of: {priceA}</p> 
+      <p>And a market capitalization of: {marketCapA}</p>
+      <p>{assetB} has a market capitalization of: {marketCapB} </p>
+      <o>If {assetA} had {assetB}'s market capitalization, it's price would be:</o>
+      <p>{newPrice}</p>
       <button onClick={ResetDataPoints}>Reset</button>
     </div>
   );
