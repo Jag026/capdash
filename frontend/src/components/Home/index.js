@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import cryptoFormatter from './CryptoFormatter.js'
+import stockFormatter from './StockFormatter.js'
 
 function Home() {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function Home() {
   const [marketCapB, setmarketCapBState] = useState('');
   const [priceA, setPriceAState] = useState('');
   const [priceB, setPriceBState] = useState('');
-  const [newPrice, setNewPrice] = useState('');
+  const [newPrice, setNewPrice] = useState(0);
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
 
@@ -65,17 +67,31 @@ function Home() {
 
   //sets data points for bottom text. Takes in an integer array [marketcap, price]
   const setDataPoints = (dataArr) => {
+    setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
     if (assetA) {
-      setmarketCapBState(market_cap)
-      setPriceBState(price)
+      setmarketCapBState(cryptoFormatter(market_cap))
+      setPriceBState(cryptoFormatter(price))
     } else {
-      setmarketCapAState(market_cap)
-      setPriceAState(price)
+      setmarketCapAState(cryptoFormatter(market_cap))
+      setPriceAState(cryptoFormatter(price))
     }
   }
 
+  const setStockDataPoints = (dataArr) => {
+    setNewPrice(0);
+    const market_cap = dataArr[0];
+    const price = dataArr[1];
+    if (assetA) {
+      setmarketCapBState(stockFormatter(market_cap))
+      setPriceBState(stockFormatter(price))
+    } else {
+      setmarketCapAState(stockFormatter(market_cap))
+      setPriceAState(stockFormatter(price))
+    }
+  }
+  
   //Resets all displayed data points 
   const ResetDataPoints = () => {
       setmarketCapBState("")
@@ -84,19 +100,12 @@ function Home() {
       setPriceAState("")
       setAssetBState("");
       setAssetAState("");
-      setNewPrice("");
+      setNewPrice("0");
   }
     
-  const pricePrediction = (priceA, marketcapA, marketcapB) => {
-    if (assetA) {
-      setNewPrice("")
-      const circulatingSupply = marketcapA / priceA;
-      const newPrice = marketcapB / circulatingSupply;
-      setNewPrice(newPrice);
+  const pricePrediction = () => {
     }
-    return;
-  }
-
+  
   return (
     <div>
       <div>
@@ -107,23 +116,23 @@ function Home() {
         <br></br>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(cryptoData, name); setDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); pricePrediction(priceA, marketCapA, marketCapB) } }>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); ; } }>{name}</button> 
                 }))
           }
         <br></br>
         <br></br>
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setDataPoints(fetchStockMcAndPrice(stockData.stockData, name))} }>{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))} }>{name}</button>  
                 }))
           }
       </div>
 
-      <p>{assetA} currently has a price of: {priceA}</p> 
-      <p>And a market capitalization of: {marketCapA}</p>
-      <p>{assetB} has a market capitalization of: {marketCapB} </p>
+      <p>{assetA} currently has a price of: ${priceA}</p> 
+      <p>And a market capitalization of: ${marketCapA}</p>
+      <p>{assetB} has a market capitalization of: ${marketCapB} </p>
       <o>If {assetA} had {assetB}'s market capitalization, it's price would be:</o>
-      <p>{newPrice}</p>
+      <p>${newPrice}</p>
       <button onClick={ResetDataPoints}>Reset</button>
     </div>
   );
