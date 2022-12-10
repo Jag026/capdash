@@ -66,17 +66,25 @@ function Home() {
   }
 
   //sets data points for bottom text. Takes in an integer array [marketcap, price]
-  const setDataPoints = (dataArr) => {
+  const setCryptoDataPoints = (dataArr) => {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
     if (assetA) {
-      setmarketCapBState(cryptoFormatter(market_cap))
-      setPriceBState(cryptoFormatter(price))
+      (async () => {
+        await setmarketCapBState(cryptoFormatter(market_cap));
+        await setPriceBState(cryptoFormatter(price))
+
+        let circulatingSupply = Number(marketCapA.split(",").join("")) / Number(priceA);
+        let newPrice = market_cap / circulatingSupply
+        setNewPrice(cryptoFormatter(newPrice));
+      })();  
     } else {
       setmarketCapAState(cryptoFormatter(market_cap))
       setPriceAState(cryptoFormatter(price))
+      return;
     }
+
   }
 
   const setStockDataPoints = (dataArr) => {
@@ -84,11 +92,19 @@ function Home() {
     const market_cap = dataArr[0];
     const price = dataArr[1];
     if (assetA) {
-      setmarketCapBState(stockFormatter(market_cap))
-      setPriceBState(stockFormatter(price))
-    } else {
+      (async () => {
+        await  setmarketCapBState(stockFormatter(market_cap))
+        await setPriceBState(stockFormatter(price))
+      
+        let circulatingSupply = Number(marketCapA.split(",").join("")) / Number(priceA);
+        let newPrice = stockFormatter(market_cap).split(",").join("") / circulatingSupply;
+        console.log(newPrice)
+        setNewPrice(cryptoFormatter(newPrice));
+      })();
+      } else {
       setmarketCapAState(stockFormatter(market_cap))
       setPriceAState(stockFormatter(price))
+      return
     }
   }
   
@@ -103,7 +119,7 @@ function Home() {
       setNewPrice("0");
   }
     
-  const pricePrediction = () => {
+  const setPotentialPriceCrypto = () => {
     }
   
   return (
@@ -116,7 +132,7 @@ function Home() {
         <br></br>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); ; } }>{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); ; } }>{name}</button> 
                 }))
           }
         <br></br>
