@@ -98,7 +98,6 @@ function Home() {
       
         let circulatingSupply = Number(marketCapA.split(",").join("")) / Number(priceA);
         let newPrice = stockFormatter(market_cap).split(",").join("") / circulatingSupply;
-        console.log(newPrice)
         setNewPrice(cryptoFormatter(newPrice));
       })();
       } else {
@@ -127,7 +126,6 @@ function Home() {
     const asset_a_marketcap= marketCapA;
     const asset_b_marketcap = marketCapB;
 
-    console.log(asset_a_price)
     dispatch(sessionActions.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }))
     }
   

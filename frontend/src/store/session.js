@@ -2,8 +2,6 @@ import { csrfFetch } from './csrf';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
-const SET_CRYPTO_NAMES = 'session/setCryptoNames';
-const SET_STOCK_NAMES = 'session/setStockNames';
 const SET_CRYPTO_DATA = 'session/setCryptoData';
 const SET_STOCK_DATA = 'session/setStockData';
 
@@ -137,7 +135,6 @@ export const addLog = (log) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  console.log(data)
   return response;
 };
 
