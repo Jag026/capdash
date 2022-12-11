@@ -119,7 +119,16 @@ function Home() {
       setNewPrice("0");
   }
     
-  const setPotentialPriceCrypto = () => {
+  const LogData = () => {
+    const asset_a = assetA;
+    const asset_b = assetB;
+    const asset_a_price = priceA;
+    const asset_b_price = priceB;
+    const asset_a_marketcap= marketCapA;
+    const asset_b_marketcap = marketCapB;
+
+    console.log(asset_a_price)
+    dispatch(sessionActions.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }))
     }
   
   return (
@@ -150,6 +159,7 @@ function Home() {
       <o>If {assetA} had {assetB}'s market capitalization, it's price would be:</o>
       <p>${newPrice}</p>
       <button onClick={ResetDataPoints}>Reset</button>
+      <button onClick={LogData}>Log Data</button>
     </div>
   );
 }

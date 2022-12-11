@@ -123,4 +123,22 @@ export const getStockData= () => async dispatch => {
   return data;
 };
 
+export const addLog = (log) => async (dispatch) => {
+  const { asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap } = log;
+  const response = await csrfFetch("/api/users/add-log", {
+    method: "POST",
+    body: JSON.stringify({
+      asset_a,
+      asset_b,
+      asset_a_price,
+      asset_b_price,
+      asset_a_marketcap,
+      asset_b_marketcap
+    }),
+  });
+  const data = await response.json();
+  console.log(data)
+  return response;
+};
+
 export default sessionReducer;
