@@ -140,7 +140,6 @@ router.get(
   '/fetch-stock-data',
   async (req, res, next) => {
     const stockData = await getStockData();
-    console.log(stockData);
     return res.json({
       stockData
     });
