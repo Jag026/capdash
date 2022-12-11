@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* header styling */
+header {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* logo styling */
+.logo {
+    font-weight: bold;
+    font-size: 2em;
+    color: #333;
+    text-decoration: none;
+}
+
+/* main content container styling */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* individual coin container styling */
+.coin-container {
+    width: 30%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* coin name styling */
+.coin-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* coin price styling */
+.coin-price {
+    font-size: 1.1em;
+    color: #555;
+    margin-top: 10px;
+}
