@@ -4,7 +4,8 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import cryptoFormatter from './CryptoFormatter.js'
 import stockFormatter from './StockFormatter.js'
-import './style.css'
+//import './style.css'
+
 function Home() {
   const dispatch = useDispatch();
 

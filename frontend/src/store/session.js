@@ -4,6 +4,7 @@ const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 const SET_CRYPTO_DATA = 'session/setCryptoData';
 const SET_STOCK_DATA = 'session/setStockData';
+const SET_LOGS = 'session/setLogs';
 
 const setUser = (user) => {
   return {
@@ -32,6 +33,14 @@ const setStockData = (stockData) => {
   };
 };
 
+const setLogs = (logs) => {
+  return {
+    type: SET_LOGS,
+    payload: logs,
+  };
+};
+
+
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
   const response = await csrfFetch('/api/session', {
@@ -51,6 +60,7 @@ const initialState = {
   cryptos: null,
   stocks: null,
   cryptoData: null,
+  logs: null,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -71,6 +81,10 @@ const sessionReducer = (state = initialState, action) => {
     case SET_STOCK_DATA:
       newState = Object.assign({}, state);
       newState.stockData = action.payload;
+      return newState;
+    case SET_LOGS:
+      newState = Object.assign({}, state);
+      newState.logs = action.payload;
       return newState;
     default:
       return state;
@@ -114,7 +128,7 @@ export const getAllCryptoData= () => async dispatch => {
   return data.cryptoData["data"];
 };
 
-export const getStockData= () => async dispatch => {
+export const getStockData = () => async dispatch => {
   const response = await csrfFetch('/api/session/fetch-stock-data');
   const data = await response.json();
   dispatch(setStockData(data)); 
@@ -135,6 +149,19 @@ export const addLog = (log) => async (dispatch) => {
     }),
   });
   const data = await response.json();
+  return response;
+};
+
+export const getLogs = (logs) => async (dispatch) => {
+  const { userId } = logs;
+  const response = await csrfFetch("/api/session/get-logs", {
+    method: "POST",
+    body: JSON.stringify({
+      userId
+    }),
+  });
+  const data = await response.json();
+  dispatch(setLogs(data));
   return response;
 };
 

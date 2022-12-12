@@ -2,6 +2,7 @@ const express = require('express');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { Log } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { CMC_API_KEY, polygonApiKey } = require('../../config');
@@ -142,6 +143,22 @@ router.get(
     const stockData = await getStockData();
     return res.json({
       stockData
+    });
+  }
+);
+
+router.post(
+    '/get-logs',
+  async (req, res) => {
+    const { userId} = req.body;
+    const logs = await Log.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    
+    return res.json({
+      logs
     });
   }
 );
