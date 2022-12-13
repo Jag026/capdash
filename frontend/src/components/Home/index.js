@@ -138,8 +138,8 @@ function Home() {
 
       <div className="flex items-center justify-center">
       <div>
-        <button onClick={setStocks} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Stocks</button>
-        <button onClick={SetCryptos} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Cryptos</button>
+        <button onClick={setStocks} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Stocks</button>
+        <button onClick={SetCryptos} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Cryptos</button>
       </div>
       </div>
 
@@ -148,12 +148,12 @@ function Home() {
       <div>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-cyan-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
                 }))
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-cyan-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
                 }))
         }
         </div>
@@ -190,8 +190,8 @@ function Home() {
 
       <div className="flex items-center justify-center my-10">
         <div>
-          <button onClick={ResetDataPoints} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
-          <button onClick={LogData} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
+          <button onClick={ResetDataPoints} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
+          <button onClick={LogData} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
         </div>
       </div>
 
