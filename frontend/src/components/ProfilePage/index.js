@@ -24,7 +24,7 @@ function ProfilePage() {
   return (
     <div>
      <div>
-      <p>Hello {user.username}</p>
+      <p className="text-3xl font-bold underline">Hello {user.username}</p>
       <p>Hello {JSON.stringify(user)}</p>
      </div>
      <div>

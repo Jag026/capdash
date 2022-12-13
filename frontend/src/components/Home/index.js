@@ -132,33 +132,69 @@ function Home() {
   
   return (
     <div>
-      <div>
+      <div className="flex items-center justify-center">
         <p>Select An Asset Class</p>
-        <button onClick={setStocks}>Stocks</button>
-        <button onClick={SetCryptos}>Cryptos</button>
-        <br></br>
-        <br></br>
-          {cryptoNameArr && 
-              cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name)); ; } }>{name}</button> 
-                }))
-          }
-        <br></br>
-        <br></br>
-          {stockNameArr && 
-              stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))} }>{name}</button>  
-                }))
-          }
       </div>
 
-      <p>{assetA} currently has a price of: ${priceA}</p> 
-      <p>And a market capitalization of: ${marketCapA}</p>
-      <p>{assetB} has a market capitalization of: ${marketCapB} </p>
-      <o>If {assetA} had {assetB}'s market capitalization, it's price would be:</o>
-      <p>${newPrice}</p>
-      <button onClick={ResetDataPoints}>Reset</button>
-      <button onClick={LogData}>Log Data</button>
+      <div className="flex items-center justify-center">
+      <div>
+        <button onClick={setStocks} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Stocks</button>
+        <button onClick={SetCryptos} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Cryptos</button>
+      </div>
+      </div>
+
+      <div>
+        <br></br>
+      <div>
+          {cryptoNameArr && 
+              cryptoNameArr.map((name => {
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
+                }))
+          }
+          {stockNameArr && 
+              stockNameArr.map((name => {
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
+                }))
+        }
+        </div>
+      </div>
+
+     <div className="flex items-center justify-center mt-10">
+      <table class="table-auto w-auto text-center">
+       <thead>
+         <tr>
+           <th class="px-4 py-2">Asset</th>
+           <th class="px-4 py-2">Price</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td className="border px-4 py-2 text-red">{assetA} currently has a price of</td>
+           <td className="border px-4 py-2">${priceA}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2">And a market capitalization of:</td>
+           <td className="border px-4 py-2">${marketCapA}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2">{assetB} has a market capitalization of:</td>
+           <td className="border px-4 py-2">${marketCapB}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2">If {assetA} had {assetB}'s market capitalization, it's price would be:</td>
+           <td className="border px-4 py-2">${newPrice}</td>
+         </tr>
+       </tbody>
+      </table>
+     </div>
+
+      <div className="flex items-center justify-center my-10">
+        <div>
+          <button onClick={ResetDataPoints} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
+          <button onClick={LogData} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
+        </div>
+      </div>
+
     </div>
   );
 }
