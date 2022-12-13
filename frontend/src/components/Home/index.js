@@ -148,12 +148,12 @@ function Home() {
       <div>
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-cyan-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
                 }))
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-cyan-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
                 }))
         }
         </div>
