@@ -9,16 +9,16 @@ function ProfilePage() {
   const user = sessionUser;
   const dispatch = useDispatch();
 
-  const [logs, setLogs] = useState("");
+  const [logs, setLogs] = useState();
   const [userId, setuserId] = useState(user.id);
 
-  const setLog = () => {
-    return 
+  if (!sessionLogs) {
+    dispatch(sessionActions.getLogs({ userId }))
   }
-  const showLogs = async(e) => {
+  
+  const showLogs = (e) => {
     e.preventDefault();
-    await dispatch(sessionActions.getLogs({ userId }))
-    await setLog()
+   setLogs(JSON.stringify(sessionLogs["logs"]))
   }  
 
   return (
