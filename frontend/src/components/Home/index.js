@@ -133,27 +133,27 @@ function Home() {
   return (
     <div>
       <div className="flex items-center justify-center">
-        <p>Select An Asset Class</p>
+        <p className="font-sans text-2xl mt-10 mb-5 font-bold">Select An Asset Class</p>
       </div>
 
       <div className="flex items-center justify-center">
       <div>
-        <button onClick={setStocks} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Stocks</button>
-        <button onClick={SetCryptos} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Cryptos</button>
+        <button onClick={setStocks} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Stocks</button>
+        <button onClick={SetCryptos} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Cryptos</button>
       </div>
       </div>
 
       <div>
         <br></br>
-      <div>
+      <div className="mx-6">
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-1 px-2 rounded text-sm m-1">{name}</button> 
                 }))
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded text-sm m-1">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-1 px-2 rounded text-sm m-1">{name}</button>  
                 }))
         }
         </div>
@@ -190,8 +190,8 @@ function Home() {
 
       <div className="flex items-center justify-center my-10">
         <div>
-          <button onClick={ResetDataPoints} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
-          <button onClick={LogData} className="bg-indigo-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
+          <button onClick={ResetDataPoints} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
+          <button onClick={LogData} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
         </div>
       </div>
 

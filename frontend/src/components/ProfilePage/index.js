@@ -24,11 +24,10 @@ function ProfilePage() {
   return (
     <div>
      <div>
-      <p className="text-3xl font-bold underline">Hello {user.username}</p>
-      <p>Hello {JSON.stringify(user)}</p>
+      <p className="text-xl p-3 mt-2">user: {user.username}</p>
      </div>
      <div>
-       <button onClick={showLogs}>Show Logs</button>
+       <button onClick={showLogs} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-1 px-3 rounded text-sm mx-4 mb-3">Show Logs</button>
      </div>
      <div>
        <p>{logs}</p>
