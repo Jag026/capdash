@@ -33,14 +33,14 @@ function ProfilePage() {
      <div>
           {logs && 
           JSON.parse(logs).map((log => {
-            const id = JSON.stringify(log["id"])
             const assetASymbol = JSON.stringify(log["asset_a"])
             const assetAPrice = JSON.stringify(log["asset_a_price"])
             const assetAMarketCap = JSON.stringify(log["asset_a_marketcap"])
             const assetBSymbol = JSON.stringify(log["asset_b"])
             const assetBPrice = JSON.stringify(log["asset_b_price"])
             const assetBMarketCap = JSON.stringify(log["asset_b_marketcap"])
-
+            let circulatingSupply = Number(log["asset_a_marketcap"].split(",").join("")) / log["asset_a_price"]
+            let newPrice = Number(log["asset_b_marketcap"].split(",").join("")) / circulatingSupply
             //let circulatingSupply = Number(assetAMarketCap.split(",").join("")) / Number(assetAPrice);
             log = JSON.stringify(log)
             return <div>
@@ -70,6 +70,8 @@ function ProfilePage() {
            <td className="border px-4 py-2 text-red">{assetBMarketCap}</td>
          </tr>
          <tr>
+          <td className="border px-4 py-2 text-red">Potential Price</td>
+          <td className="border px-4 py-2 text-red">{newPrice.toFixed(2)}</td>
          </tr>
        </tbody>
       </table>
