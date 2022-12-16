@@ -133,6 +133,9 @@ function Home() {
   return (
     <div>
       <div className="flex items-center justify-center">
+        <h1 className="font-serif italic text-7xl mt-10 mb-5 font-bold">Cap-Dash</h1>
+      </div>
+      <div className="flex items-center justify-center">
         <p className="font-sans text-2xl mt-10 mb-5 font-bold">Select An Asset Class</p>
       </div>
 
