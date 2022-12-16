@@ -40,7 +40,6 @@ function ProfilePage() {
             const assetBSymbol = JSON.stringify(log["asset_b"])
             const assetBPrice = JSON.stringify(log["asset_b_price"])
             const assetBMarketCap = JSON.stringify(log["asset_b_marketcap"])
-            let circulatingSupply = assetAPrice;
 
             //let circulatingSupply = Number(assetAMarketCap.split(",").join("")) / Number(assetAPrice);
             log = JSON.stringify(log)
@@ -71,7 +70,6 @@ function ProfilePage() {
            <td className="border px-4 py-2 text-red">{assetBMarketCap}</td>
          </tr>
          <tr>
-           <td className="border px-4 py-2">Potential Price</td>
          </tr>
        </tbody>
       </table>
