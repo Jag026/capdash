@@ -3,6 +3,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+
 function ProfilePage() {  
   const sessionUser = useSelector(state => state.session.user);
   const sessionLogs = useSelector(state => state.session.logs);
@@ -30,7 +31,54 @@ function ProfilePage() {
        <button onClick={showLogs} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-1 px-3 rounded text-sm mx-4 mb-3">Show Logs</button>
      </div>
      <div>
-       <p>{logs}</p>
+          {logs && 
+          JSON.parse(logs).map((log => {
+            const id = JSON.stringify(log["id"])
+            const assetASymbol = JSON.stringify(log["asset_a"])
+            const assetAPrice = JSON.stringify(log["asset_a_price"])
+            const assetAMarketCap = JSON.stringify(log["asset_a_marketcap"])
+            const assetBSymbol = JSON.stringify(log["asset_b"])
+            const assetBPrice = JSON.stringify(log["asset_b_price"])
+            const assetBMarketCap = JSON.stringify(log["asset_b_marketcap"])
+            let circulatingSupply = assetAPrice;
+
+            //let circulatingSupply = Number(assetAMarketCap.split(",").join("")) / Number(assetAPrice);
+            log = JSON.stringify(log)
+            return <div>
+     <div className="flex items-center justify-center mt-10">
+      <table class="table-auto w-auto text-center">
+       <thead>
+         <tr>
+          <th class="px-4 py-2"></th>
+           <th class="px-4 py-2">Asset A</th>
+           <th class="px-4 py-2">Asset B</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td className="border px-4 py-2 text-red">Symbol</td>
+           <td className="border px-4 py-2 text-red">{assetASymbol}</td>
+           <td className="border px-4 py-2 text-red">{assetBSymbol}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2 text-red">Price</td>
+           <td className="border px-4 py-2 text-red">{assetAPrice}</td>
+           <td className="border px-4 py-2 text-red">{assetBPrice}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2">Market Cap</td>
+            <td className="border px-4 py-2 text-red">{assetAMarketCap}</td>
+           <td className="border px-4 py-2 text-red">{assetBMarketCap}</td>
+         </tr>
+         <tr>
+           <td className="border px-4 py-2">Potential Price</td>
+         </tr>
+       </tbody>
+      </table>
+     </div>
+              </div>
+                }))
+          }
      </div>
    </div>
   );
