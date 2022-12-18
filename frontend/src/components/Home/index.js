@@ -143,8 +143,8 @@ function Home() {
         </div>
       </div>
 
-     <div className="flex items-center justify-center mt-10">
-      <table class="table-auto w-auto text-center w-full text-2xl">
+     <div className="flex justify-center mt-10">
+      <table class="table-auto w-auto text-center w-80/100 text-3xl">
        <thead>
          <tr>
            <th class="px-4 py-2">Asset</th>
@@ -153,19 +153,19 @@ function Home() {
        </thead>
        <tbody>
          <tr>
-           <td className="border px-4 py-2 text-red">{assetA} currently has a price of</td>
-           <td className="border px-4 py-2">${priceA}</td>
+           <td className="border px-4 py-2 flex justify-center">{assetA} currently has a price of</td>
+           <td className="border px-4 py-2 ">${priceA}</td>
          </tr>
          <tr>
-           <td className="border px-4 py-2">And a market capitalization of:</td>
-           <td className="border px-4 py-2">${marketCapA}</td>
+           <td className="border px-4 py-2 flex justify-center">And a market capitalization of:</td>
+           <td className="border px-4 py-2 ">${marketCapA}</td>
          </tr>
          <tr>
-           <td className="border px-4 py-2">{assetB} has a market capitalization of:</td>
+           <td className="border px-4 py-2 flex justify-center">{assetB} has a market capitalization of:</td>
            <td className="border px-4 py-2">${marketCapB}</td>
          </tr>
          <tr>
-           <td className="border px-4 py-2">If {assetA} had {assetB}'s market capitalization, it's price would be:</td>
+           <td className="border px-4 py-2 flex justify-center">If {assetA} had {assetB}'s market capitalization, it's price would be:</td>
            <td className="border px-4 py-2">${newPrice}</td>
          </tr>
        </tbody>
