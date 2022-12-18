@@ -144,7 +144,7 @@ function Home() {
       </div>
 
      <div className="flex justify-center mt-10">
-      <table class="table-auto w-auto text-center w-80/100 text-3xl">
+      <table class="table-auto w-auto text-center w-80/100 text-5xl">
        <thead>
          <tr>
            <th class="px-4 py-2">Asset</th>
@@ -173,13 +173,13 @@ function Home() {
      </div>
      
       <div className="flex items-center justify-center">
-        <h4 className="font-sans text-4xl mt-10 mb-5 font-bold">Select An Asset Class</h4>
+        <h4 className="font-sans text-5xl mt-14 m-10 font-bold">Select An Asset Class</h4>
       </div>
 
       <div className="flex items-center justify-center">
       <div>
-        <button onClick={setStocks} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-3xl m-1">Stocks</button>
-        <button onClick={SetCryptos} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-3xl m-1">Cryptos</button>
+        <button onClick={setStocks} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-5xl m-2">Stocks</button>
+        <button onClick={SetCryptos} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-5xl m-2">Cryptos</button>
       </div>
       </div>
 
@@ -188,12 +188,12 @@ function Home() {
       <div className="mx-6">
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded m-1 text-2xl m-1">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded m-1 text-3xl m-1">{name}</button> 
                 }))
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded text-2xl m-1">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded text-3xl m-1">{name}</button>  
                 }))
         }
         </div>
