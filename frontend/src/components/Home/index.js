@@ -144,7 +144,7 @@ function Home() {
       </div>
 
      <div className="flex justify-center mt-10">
-      <table class="table-auto w-auto text-center w-80/100 text-3xl sm:text-lg">
+      <table class="table-auto w-auto text-center w-80/100 text-3xl md:text-lg">
        <thead>
          <tr>
            <th class="px-4 py-2">Asset</th>
