@@ -143,34 +143,10 @@ function Home() {
         </div>
       </div>
 
-     <div className="flex justify-center mt-10">
-      <table class="table-auto w-auto text-center w-80/100 text-3xl md:text-lg">
-       <thead>
-         <tr>
-           <th class="px-4 py-2">Asset</th>
-           <th class="px-4 py-2">Price</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr>
-           <td className="border px-4 py-2 flex justify-center">{assetA} currently has a price of</td>
-           <td className="border px-4 py-2 ">${priceA}</td>
-         </tr>
-         <tr>
-           <td className="border px-4 py-2 flex justify-center">And a market capitalization of:</td>
-           <td className="border px-4 py-2 ">${marketCapA}</td>
-         </tr>
-         <tr>
-           <td className="border px-4 py-2 flex justify-center">{assetB} has a market capitalization of:</td>
-           <td className="border px-4 py-2">${marketCapB}</td>
-         </tr>
-         <tr>
-           <td className="border px-4 py-2 flex justify-center">If {assetA} had {assetB}'s market capitalization, it's price would be:</td>
-           <td className="border px-4 py-2">${newPrice}</td>
-         </tr>
-       </tbody>
-      </table>
-     </div>
+           <p className="text-neutral-100 flex justify-center mt-3">{assetA} currently has a price of: ${priceA}</p>
+           <p className="text-neutral-100 flex justify-center mt-3">And a market capitalization of: ${marketCapA}</p>
+           <p className="text-neutral-100 flex justify-center mt-3">{assetB} has a market capitalization of: ${marketCapB}</p>
+           <p className="text-neutral-100 flex justify-center mt-3">If {assetA} had {assetB}'s market capitalization, it's price would be:${newPrice}</p>
      
       <div className="flex items-center justify-center">
         <h4 className="font-sans text-5xl mt-6 m-10 font-bold sm:text-3xl">Select An Asset Class</h4>
@@ -178,22 +154,22 @@ function Home() {
 
       <div className="flex items-center justify-center">
       <div>
-        <button onClick={setStocks} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-5xl m-1 sm:py-1 sm:px-2 sm:text-2xl">Stocks</button>
-        <button onClick={SetCryptos} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-4 px-5 rounded text-5xl m-1 sm:py-1 sm:px-2 sm:text-2xl">Cryptos</button>
+        <button onClick={setStocks} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold py-4 px-5 rounded text-5xl m-1 sm:py-1 sm:px-2 sm:text-2xl">Stocks</button>
+        <button onClick={SetCryptos} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold py-4 px-5 rounded text-5xl m-1 sm:py-1 sm:px-2 sm:text-2xl">Cryptos</button>
       </div>
       </div>
 
       <div>
-        <br></br>
+        <br></br>amber
       <div className="mx-6 sm:mb-12">
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-emerald-700 hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded m-1 text-3xl m-1 sm:py-1 sm:px-2 sm:text-base">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-blue-7 hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded m-1 text-3xl m-1 sm:py-1 sm:px-2 sm:text-base">{name}</button> 
                 }))
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-emerald-700  hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded text-3xl m-1 sm:py-1 sm:px-2 sm:text-base">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-blue-7  hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded text-3xl m-1 sm:py-1 sm:px-2 sm:text-base">{name}</button>  
                 }))
         }
         </div>
