@@ -4,6 +4,8 @@ import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import cryptoFormatter from './CryptoFormatter.js'
 import stockFormatter from './StockFormatter.js'
+import CookiesBanner from './CookiesBanner'
+
 //import './style.css'
 
 function Home() {
@@ -174,6 +176,7 @@ function Home() {
         }
         </div>
       </div>
+      <CookiesBanner />
     </div>
   );
 }
