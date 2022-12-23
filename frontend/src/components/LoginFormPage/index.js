@@ -25,7 +25,7 @@ function LoginFormPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="text-white flex flex-col m-8 mt-20">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -36,18 +36,20 @@ function LoginFormPage() {
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
-      <label>
+      <label className="mt-8">
         Password
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit" className="bg-white mt-8 w-20 text-black">Log In</button>
     </form>
   );
 }
