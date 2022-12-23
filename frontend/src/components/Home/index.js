@@ -135,7 +135,7 @@ function Home() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <h1 className="font-serif italic text-7xl mt-1 mb-5 font-bold mid:text-7xl">Cap-Dash</h1>
+        <img src={require("./Screenshot_2022-12-22_at_11.07.22_PM-removebg-preview.png")} className="w-2/5"/>
       </div>
 
       <div className="flex items-center justify-center my-10">
