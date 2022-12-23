@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
+import MobileHome from "./components/Home/mobileIndex.js";
 import ProfilePage from "./components/ProfilePage";
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path="/profile">
             <ProfilePage />
+          </Route>
+          <Route exact path="/mobile">
+            <MobileHome />
           </Route>
         </Switch>
       )}
