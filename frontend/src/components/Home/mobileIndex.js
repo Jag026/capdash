@@ -135,7 +135,7 @@ function MobileHome() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <img src={require("./Screenshot_2022-12-22_at_11.07.22_PM-removebg-preview.png")} className="w-84 mt-20"/>
+        <img src={require("./Screenshot_2022-12-22_at_11.07.22_PM-removebg-preview.png")} className="w-10/12 mt-20"/>
       </div>
 
       <div className="flex items-center justify-center my-10">
@@ -145,19 +145,19 @@ function MobileHome() {
         </div>
       </div>
 
-           <p className="text-neutral-100 flex justify-center mt-3 text-4xl mt-10">{assetA} currently has a price of: ${priceA}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-4xl mt-10">And a market capitalization of: ${marketCapA}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-4xl mt-10">{assetB} has a market capitalization of: ${marketCapB}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-4xl mt-10">If {assetA} had {assetB}'s market capitalization, it's price would be:${newPrice}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10">{assetA} currently has a price of: ${priceA}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: ${marketCapA}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">{assetB} has a market capitalization of: ${marketCapB}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">If {assetA} had {assetB}'s market capitalization, it's price would be:${newPrice}</p>
      
-      <div className="flex items-center justify-center">
-        <h4 className="font-sans text-neutral-100">Select An Asset Class</h4>
+      <div className="flex items-center justify-center mt-14">
+        <h4 className="font-sans text-neutral-100 text-5xl">Select An Asset Class</h4>
       </div>
 
       <div className="flex items-center justify-center">
-      <div>
-        <button onClick={setStocks} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold">Stocks</button>
-        <button onClick={SetCryptos} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold">Cryptos</button>
+      <div className="mt-10">
+        <button onClick={setStocks} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold w-64 h-24 text-5xl mx-10">Stocks</button>
+        <button onClick={SetCryptos} className="bg-blue-7  hover:bg-indigo-500 text-white font-bold w-64 h-24 text-5xl mx-10">Cryptos</button>
       </div>
       </div>
 
@@ -166,7 +166,7 @@ function MobileHome() {
       <div className="mx-6 sm:mb-12">
           {cryptoNameArr && 
               cryptoNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-blue-7 hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded">{name}</button> 
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(cryptoData, name); setCryptoDataPoints(fetchCryptoMcAndPrice(cryptoData, name))}} className="bg-blue-7 hover:bg-emerald-900 text-white text-5xl font-bold py-3 px-4 m-3 rounded">{name}</button> 
                 }))
           }
           {stockNameArr && 
