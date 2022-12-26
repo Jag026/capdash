@@ -140,8 +140,8 @@ function Home() {
 
       <div className="flex items-center justify-center my-10">
         <div>
-          <button onClick={ResetDataPoints} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
-          <button onClick={LogData} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
+          <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
+          <button onClick={LogData} className="bg-lime-300  hover:bg-neutral-500 text-blue-7 font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
         </div>
       </div>
 

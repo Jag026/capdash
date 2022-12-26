@@ -140,15 +140,15 @@ function MobileHome() {
 
       <div className="flex items-center justify-center my-10">
         <div>
-          <button onClick={ResetDataPoints} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold mx-10 w-64 h-24 text-5xl">Reset</button>
-          <button onClick={LogData} className="bg-neutral-800  hover:bg-neutral-500 text-white font-bold mx-10 w-64 h-24 text-5xl">Log Data</button>
+          <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Reset</button>
+          <button onClick={LogData} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>
         </div>
       </div>
 
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10">{assetA} currently has a price of: ${priceA}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: ${marketCapA}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">{assetB} has a market capitalization of: ${marketCapB}</p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28">If {assetA} had {assetB}'s market capitalization, it's price would be:${newPrice}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span> currently has a price of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${priceA}</span></p>
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${marketCapA}</span></p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}</span> has a market capitalization of: ${marketCapB}</p>
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">If <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetA}</span> had <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}'s</span> market capitalization, it's price would be:<span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${newPrice}</span></p>
      
       <div className="flex items-center justify-center mt-14">
         <h4 className="font-sans text-neutral-100 text-5xl">Select An Asset Class</h4>
