@@ -26,13 +26,11 @@ function SignupFormPage() {
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-
       <div className="text-white flex flex-col">
       <label className="m-3">
         Email
