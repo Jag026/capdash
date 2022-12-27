@@ -32,42 +32,49 @@ function SignupFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <label>
+
+      <div className="text-white flex flex-col">
+      <label className="m-3">
         Email
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
-      <label>
+      <label className="m-3">
         Username
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
-      <label>
+      <label className="m-3">
         Password
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
-      <label>
+      <label className="m-3">
         Confirm Password
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          className="ml-4"
         />
       </label>
+      </div>
       <button type="submit">Sign Up</button>
     </form>
   );
