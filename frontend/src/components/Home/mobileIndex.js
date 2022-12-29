@@ -30,6 +30,10 @@ function MobileHome() {
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
 
+  if (window.screen.width > 768) {
+    return <Redirect to={{ pathname: '/main' }} />
+  }
+
   const SetCryptos = (e) => {
     e.preventDefault();
     setCryptoNameArr(cryptoData.map(crypto => { return crypto.symbol}))

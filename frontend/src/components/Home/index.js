@@ -9,6 +9,7 @@ import CookiesBanner from './CookiesBanner'
 //import './style.css'
 
 function Home() {
+  
   const dispatch = useDispatch();
 
   let cryptoData = useSelector(state => state.session.cryptoData);

@@ -27,13 +27,13 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path="/">
+          <Route exact path="/main">
             <Home />
           </Route>
           <Route exact path="/profile">
             <ProfilePage />
           </Route>
-          <Route exact path="/mobile">
+          <Route exact path="/">
             <MobileHome />
           </Route>
         </Switch>
