@@ -10,7 +10,7 @@ function Navigation({ isLoaded }){
   return (
    <div>
     <div>
-      <button onClick={() => setMenuOpen(!menuOpen)} className="bg-neutral-300"><i class="fa-regular fa-square-chevron-down"></i></button>
+      <button onClick={() => setMenuOpen(!menuOpen)} className="bg-neutral-600 w-12 h-10 m-1"><i class="fa-solid fa-bars"></i></button>
       {menuOpen && (
         <ul className="mt-3">
             <li className="py-3 text-xl">
