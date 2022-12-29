@@ -139,7 +139,7 @@ function MobileHome() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <img src={require("./Screenshot_2022-12-22_at_11.07.22_PM-removebg-preview.png")} className="w-10/12 mt-20"/>
+        <img src={require("./CAP-DASH.png")} className="w-10/12"/>
       </div>
 
       <div className="flex items-center justify-center my-10">

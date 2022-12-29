@@ -136,17 +136,17 @@ function Home() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <img src={require("./Screenshot_2022-12-22_at_11.07.22_PM-removebg-preview.png")} className="w-2/5"/>
+        <img src={require("./CAP-DASH.png")} className="w-2/5"/>
       </div>
 
-      <div className="flex items-center justify-center my-10">
+      <div className="flex items-center justify-center">
         <div>
           <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold py-2 px-4 rounded text-sm m-1">Reset</button>
           <button onClick={LogData} className="bg-lime-300  hover:bg-neutral-500 text-blue-7 font-bold py-2 px-4 rounded text-sm m-1">Log Data</button>
         </div>
       </div>
 
-           <p className="text-neutral-100 text-xl flex justify-center mt-3"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span>currently has a price of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{priceA}</span></p>
+           <p className="text-neutral-100 text-xl flex justify-center"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span>currently has a price of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{priceA}</span></p>
            <p className="text-neutral-100 text-xl flex justify-center mt-3">And a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{marketCapA}</span></p>
            <p className="text-neutral-100 text-xl flex justify-center mt-3">{assetB} has a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{marketCapB}</span></p>
            <p className="text-neutral-100 text-xl flex justify-center mt-3">If <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span> had {<span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetB}</span>}'s market capitalization, it's price would be: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{newPrice}</span></p>
