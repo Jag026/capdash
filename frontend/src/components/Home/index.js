@@ -146,10 +146,10 @@ function Home() {
         </div>
       </div>
 
-           <p className="text-neutral-100 text-xl flex justify-center mt-3">{assetA} currently has a price of: ${priceA}</p>
-           <p className="text-neutral-100 text-xl flex justify-center mt-3">And a market capitalization of: ${marketCapA}</p>
-           <p className="text-neutral-100 text-xl flex justify-center mt-3">{assetB} has a market capitalization of: ${marketCapB}</p>
-           <p className="text-neutral-100 text-xl flex justify-center mt-3">If {assetA} had {assetB}'s market capitalization, it's price would be:${newPrice}</p>
+           <p className="text-neutral-100 text-xl flex justify-center mt-3"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span>currently has a price of: ${priceA}</p>
+           <p className="text-neutral-100 text-xl flex justify-center mt-3">And a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{marketCapA}</span></p>
+           <p className="text-neutral-100 text-xl flex justify-center mt-3">{assetB} has a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{marketCapB}</span></p>
+           <p className="text-neutral-100 text-xl flex justify-center mt-3">If <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span> had {<span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetB}</span>}'s market capitalization, it's price would be: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{newPrice}</span></p>
      
       <div className="flex items-center justify-center">
         <h4 className="font-sans text-neutral-100 text-4xl mt-8 m-10 font-bold">Select An Asset Class</h4>
