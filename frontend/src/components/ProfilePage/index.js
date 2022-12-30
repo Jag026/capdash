@@ -41,11 +41,13 @@ function ProfilePage() {
             const assetBMarketCap = JSON.stringify(log["asset_b_marketcap"])
             let circulatingSupply = Number(log["asset_a_marketcap"].split(",").join("")) / log["asset_a_price"]
             let newPrice = Number(log["asset_b_marketcap"].split(",").join("")) / circulatingSupply
+            const createdAt = JSON.stringify(log["createdAt"])
             //let circulatingSupply = Number(assetAMarketCap.split(",").join("")) / Number(assetAPrice);
             log = JSON.stringify(log)
+            console.log(log)
             return <div>
      <div className="flex items-center justify-center mt-10">
-      <table class="table-auto w-auto text-center">
+      <table class="table-auto w-auto text-center text-white">
        <thead>
          <tr>
           <th class="px-4 py-2"></th>
@@ -74,6 +76,7 @@ function ProfilePage() {
           <td className="border px-4 py-2 text-red">{newPrice.toFixed(2)}</td>
          </tr>
        </tbody>
+        <p>created: {createdAt}</p>
       </table>
      </div>
               </div>
