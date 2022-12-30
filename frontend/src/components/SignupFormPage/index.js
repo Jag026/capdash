@@ -27,7 +27,7 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mt-20 mx-20 text-xl">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -39,7 +39,7 @@ function SignupFormPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="ml-4"
+          className="ml-4 text-black p-1"
         />
       </label>
       <label className="m-3">
@@ -49,7 +49,7 @@ function SignupFormPage() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          className="ml-4"
+          className="ml-4 text-black p-1"
         />
       </label>
       <label className="m-3">
@@ -59,7 +59,7 @@ function SignupFormPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="ml-4"
+          className="ml-4 text-black p-1"
         />
       </label>
       <label className="m-3">
@@ -69,11 +69,11 @@ function SignupFormPage() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-          className="ml-4"
+          className="ml-4 text-black p-1"
         />
       </label>
       </div>
-      <button type="submit">Sign Up</button>
+      <button type="submit" className="bg-white m-4 p-1">Sign Up</button>
     </form>
   );
 }
