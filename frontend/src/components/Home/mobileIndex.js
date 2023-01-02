@@ -29,6 +29,7 @@ function MobileHome() {
   const [newPrice, setNewPrice] = useState(0);
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
+  const [investmentStr, setinvestmentStr] = useState([]);
 
   if (window.screen.width > 768) {
     return <Redirect to={{ pathname: '/main' }} />
@@ -48,7 +49,7 @@ function MobileHome() {
 
   const setAsset = (data, symbol) => {
     let asset = data.filter(asset => asset.symbol === symbol)
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       setAssetBState(asset[0].symbol);
     } else {
       setAssetAState(asset[0].symbol);
@@ -77,7 +78,7 @@ function MobileHome() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       (async () => {
         await setmarketCapBState(cryptoFormatter(market_cap));
         await setPriceBState(cryptoFormatter(price))
@@ -98,7 +99,7 @@ function MobileHome() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       (async () => {
         await  setmarketCapBState(stockFormatter(market_cap))
         await setPriceBState(stockFormatter(price))
