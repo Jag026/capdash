@@ -139,10 +139,10 @@ function MobileHome() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <img src={require("./CAP-DASH.png")} className="w-10/12"/>
+        <img src={require("./logo--.png")} className="w-10/12 mt-8"/>
       </div>
 
-      <div className="flex items-center justify-center my-10">
+      <div className="flex items-center justify-center my-16">
         <div>
           <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Reset</button>
           <button onClick={LogData} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>

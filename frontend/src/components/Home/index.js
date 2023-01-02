@@ -136,7 +136,7 @@ function Home() {
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
-        <img src={require("./CAP-DASH.png")} className="w-2/5"/>
+        <img src={require("./new-logo.png")} className="w-2/5"/>
       </div>
 
       <div className="flex items-center justify-center">
