@@ -47,7 +47,7 @@ function Home() {
 
   const setAsset = (data, symbol) => {
     let asset = data.filter(asset => asset.symbol === symbol)
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       setAssetBState(asset[0].symbol);
     } else {
       setAssetAState(asset[0].symbol);
@@ -76,7 +76,7 @@ function Home() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       (async () => {
         await setmarketCapBState(cryptoFormatter(market_cap));
         await setPriceBState(cryptoFormatter(price))
@@ -100,7 +100,7 @@ function Home() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA) {
+    if (assetA && assetA !== "select an asset") {
       (async () => {
         await  setmarketCapBState(stockFormatter(market_cap))
         await setPriceBState(stockFormatter(price))
