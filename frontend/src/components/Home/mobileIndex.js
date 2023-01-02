@@ -30,7 +30,8 @@ function MobileHome() {
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
   const [investmentStr, setinvestmentStr] = useState([]);
-
+  const [investmentAmount, setinvestmentAmount] = useState([]);
+  
   if (window.screen.width > 768) {
     return <Redirect to={{ pathname: '/main' }} />
   }
@@ -86,6 +87,8 @@ function MobileHome() {
         let circulatingSupply = Number(marketCapA.split(",").join("")) / Number(priceA);
         let newPrice = market_cap / circulatingSupply
         setNewPrice(cryptoFormatter(newPrice));
+        setinvestmentStr("An investment of $10k would be")
+        setinvestmentAmount('$' + cryptoFormatter(10000 / priceA * (Number(newPrice))))
       })();  
     } else {
       setmarketCapAState(cryptoFormatter(market_cap))
@@ -107,6 +110,8 @@ function MobileHome() {
         let circulatingSupply = Number(marketCapA.split(",").join("")) / Number(priceA);
         let newPrice = stockFormatter(market_cap).split(",").join("") / circulatingSupply;
         setNewPrice(cryptoFormatter(newPrice));
+        setinvestmentStr("An investment of $10k would be")
+        setinvestmentAmount('$' + cryptoFormatter(10000 / priceA * (Number(newPrice))))
       })();
       } else {
       setmarketCapAState(stockFormatter(market_cap))
@@ -154,7 +159,7 @@ function MobileHome() {
            <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${marketCapA}</span></p>
            <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}</span> has a market capitalization of: ${marketCapB}</p>
            <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">If <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetA}</span> had <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}'s</span> market capitalization, it's price would be:<span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${newPrice}</span></p>
-     
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28"> {investmentStr} {investmentAmount}</p>
       <div className="flex items-center justify-center mt-14">
         <h4 className="font-sans text-neutral-100 text-5xl">Select An Asset Class</h4>
       </div>
