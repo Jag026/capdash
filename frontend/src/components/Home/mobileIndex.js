@@ -155,11 +155,14 @@ function MobileHome() {
         </div>
       </div>
 
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold">{assetA}</span> currently has a price of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${priceA}</span></p>
-           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${marketCapA}</span></p>
-           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28"><span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}</span> has a market capitalization of: ${marketCapB}</p>
-           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">If <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetA}</span> had <span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">{assetB}'s</span> market capitalization, it's price would be:<span className="bg-lime-300 mr-2 text-blue-7 px-3 font-bold h-14">${newPrice}</span></p>
-           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28"> {investmentStr} {investmentAmount}</p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10"><span className="text-lime-300 mr-2 px-3 font-bold">{assetA}</span> currently has a price of: <span className="text-lime-300 mr-2 px-3 font-bold h-14">${priceA}</span></p>
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28">And a market capitalization of: <span className="text-lime-300 mr-2 px-3 font-bold h-14">${marketCapA}</span></p>
+           <p className="text-neutral-100 flex justify-center mt-3 text-5xl mt-10 px-28"><span className="text-lime-300 mr-2 px-3 font-bold h-14">{assetB}</span> has a market capitalization of:</p>
+           <p className="flex justify-center text-5xl px-28 text-lime-300 mr-2 px-3 font-bold h-14">${marketCapB}</p>
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-10">If <span className="text-lime-300 mr-2 px-3 font-bold h-14">{assetA}</span> had <span className="mr-2 text-lime-300 px-3 font-bold h-14">{assetB}'s</span> market capitalization</p> 
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-10">it's price would be:<span className="text-lime-300 mr-2 px-3 font-bold h-14">${newPrice}</span></p>
+           <p className="text-neutral-100 flex flex-wrap justify-center mt-3 text-5xl mt-10 px-28"> {investmentStr}</p>
+           <p className="text-neutral-100 flex flex-wrap justify-center text-5xl px-28 text-lime-300 font-bold mt-3">{investmentAmount}</p>
       <div className="flex items-center justify-center mt-14">
         <h4 className="font-sans text-neutral-100 text-5xl">Select An Asset Class</h4>
       </div>
