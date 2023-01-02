@@ -20,8 +20,8 @@ function MobileHome() {
       dispatch(sessionActions.getStockData())
     }
   
-  const [assetA, setAssetAState] = useState('');
-  const [assetB, setAssetBState] = useState('');
+  const [assetA, setAssetAState] = useState('select an asset');
+  const [assetB, setAssetBState] = useState('select an asset');
   const [marketCapA, setmarketCapAState] = useState('');
   const [marketCapB, setmarketCapBState] = useState('');
   const [priceA, setPriceAState] = useState('');
