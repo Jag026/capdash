@@ -19,8 +19,22 @@ function MobileHome() {
     if (!stockData) {
       dispatch(sessionActions.getStockData())
     }
+
   
-    //fetches marketcap and price from crypto data
+  const [assetA, setAssetAState] = useState('ETH');
+  const [assetB, setAssetBState] = useState('BTC');
+  const [marketCapA, setmarketCapAState] = useState('');
+  const [marketCapB, setmarketCapBState] = useState("");
+  const [priceA, setPriceAState] = useState("");
+  const [priceB, setPriceBState] = useState('');
+  const [newPrice, setNewPrice] = useState();
+  const [cryptoNameArr, setCryptoNameArr] = useState([]);
+  const [stockNameArr, setStockNameArr] = useState([]);
+  const [investmentStr, setinvestmentStr] = useState([]);
+  const [investmentAmount, setinvestmentAmount] = useState([]);
+  const [firstTime, setFirstTime] = useState(true);
+  
+  //fetches marketcap and price from crypto data
   const fetchCryptoMcAndPrice = (data, symbol) => {
     let arr = [];
     let asset = data.filter(asset => asset.symbol === symbol)
@@ -36,28 +50,16 @@ function MobileHome() {
     arr[1] = asset.price
     return arr;
   }
-  
-  const [assetA, setAssetAState] = useState('ETH');
-  const [assetB, setAssetBState] = useState('BTC');
-  const [marketCapA, setmarketCapAState] = useState('');
-  const [marketCapB, setmarketCapBState] = useState("");
-  const [priceA, setPriceAState] = useState("");
-  const [priceB, setPriceBState] = useState('');
-  const [newPrice, setNewPrice] = useState();
-  const [cryptoNameArr, setCryptoNameArr] = useState([]);
-  const [stockNameArr, setStockNameArr] = useState([]);
-  const [investmentStr, setinvestmentStr] = useState([]);
-  const [investmentAmount, setinvestmentAmount] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
-      setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0])
-      setmarketCapBState(fetchCryptoMcAndPrice(cryptoData, 'BTC').toLocaleString().split(".")[0])
-      setPriceAState(fetchCryptoMcAndPrice(cryptoData, 'ETH')[1].toLocaleString().slice(0, -1));
-      setNewPrice((fetchCryptoMcAndPrice(cryptoData, 'BTC')[0] / fetchCryptoMcAndPrice(cryptoData, 'ETH')[0] * fetchCryptoMcAndPrice(cryptoData, 'ETH')[1]).toLocaleString().slice(0, -1));
-    }, 300)
+        setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0])
+        setmarketCapBState(fetchCryptoMcAndPrice(cryptoData, 'BTC').toLocaleString().split(".")[0])
+        setPriceAState(fetchCryptoMcAndPrice(cryptoData, 'ETH')[1].toLocaleString().slice(0, -1));
+        setNewPrice((fetchCryptoMcAndPrice(cryptoData, 'BTC')[0] / fetchCryptoMcAndPrice(cryptoData, 'ETH')[0] * fetchCryptoMcAndPrice(cryptoData, 'ETH')[1]).toLocaleString().slice(0, -1));
+      }, 300)
 
-    }, [cryptoData, marketCapA]);
+    }, [cryptoData]);
 
 
   if (window.screen.width > 768) {
@@ -78,19 +80,32 @@ function MobileHome() {
 
   const setAsset = (data, symbol) => {
     let asset = data.filter(asset => asset.symbol === symbol)
-    if (assetA && assetA !== "select an asset") {
+    if (assetA && assetA !== "ETH") {
       setAssetBState(asset[0].symbol);
     } else {
       setAssetAState(asset[0].symbol);
     }
   }  
 
+  //Resets all displayed data points 
+  const ResetDataPoints = () => {
+      setmarketCapBState("")
+      setPriceBState("")
+      setmarketCapAState("")
+      setPriceAState("")
+      setAssetBState("");
+      setAssetAState("");
+      setNewPrice("0");
+      setinvestmentStr("")
+      setinvestmentAmount("")
+  }
+
   //sets data points for bottom text. Takes in an integer array [marketcap, price]
   const setCryptoDataPoints = (dataArr) => {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA && assetA !== "select an asset") {
+    if (assetA && assetA !== "ETH") {
       (async () => {
         await setmarketCapBState(cryptoFormatter(market_cap));
         await setPriceBState(cryptoFormatter(price))
@@ -113,7 +128,7 @@ function MobileHome() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA && assetA !== "select an asset") {
+    if (assetA && assetA !== "ETH" && firstTime) {
       (async () => {
         await  setmarketCapBState(stockFormatter(market_cap))
         await setPriceBState(stockFormatter(price))
@@ -127,20 +142,11 @@ function MobileHome() {
       } else {
       setmarketCapAState(stockFormatter(market_cap))
       setPriceAState(stockFormatter(price))
+      setFirstTime = false;
       return
     }
   }
-  
-  //Resets all displayed data points 
-  const ResetDataPoints = () => {
-      setmarketCapBState("")
-      setPriceBState("")
-      setmarketCapAState("")
-      setPriceAState("")
-      setAssetBState("");
-      setAssetAState("");
-      setNewPrice("0");
-  }
+
     
   const LogData = () => {
     const asset_a = assetA;
@@ -195,7 +201,7 @@ function MobileHome() {
           }
           {stockNameArr && 
               stockNameArr.map((name => {
-                return <button onClick={e => { e.preventDefault(); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-blue-7  hover:bg-emerald-900 text-white text-5xl font-bold py-3 px-4 m-3 rounded">{name}</button>  
+                return <button onClick={e => { e.preventDefault(); setNewPrice("0"); setAsset(stockData.stockData, name); setStockDataPoints(fetchStockMcAndPrice(stockData.stockData, name))}} className="bg-blue-7  hover:bg-emerald-900 text-white text-5xl font-bold py-3 px-4 m-3 rounded">{name}</button>  
                 }))
         }
         </div>
