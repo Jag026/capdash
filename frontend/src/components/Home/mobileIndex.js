@@ -49,14 +49,6 @@ function MobileHome() {
   const [investmentStr, setinvestmentStr] = useState([]);
   const [investmentAmount, setinvestmentAmount] = useState([]);
 
-  const isFirstRender = useRef(true);
-
-/*    
-      setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0]);
-      setmarketCapBState(fetchCryptoMcAndPrice(cryptoData, 'BTC').toLocaleString().split(".")[0]);
-      setPriceAState(fetchCryptoMcAndPrice(cryptoData, 'ETH')[1].toLocaleString());
-      setNewPrice((fetchCryptoMcAndPrice(cryptoData, 'BTC')[0] / fetchCryptoMcAndPrice(cryptoData, 'ETH')[0] * fetchCryptoMcAndPrice(cryptoData, 'ETH')[1]).toLocaleString().slice(0, -1));
-  */
   useEffect(() => {
     setTimeout(() => {
       setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0])
