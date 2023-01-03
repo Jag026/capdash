@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector, } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -20,18 +20,54 @@ function MobileHome() {
       dispatch(sessionActions.getStockData())
     }
   
-  const [assetA, setAssetAState] = useState('select an asset');
-  const [assetB, setAssetBState] = useState('select an asset');
+    //fetches marketcap and price from crypto data
+  const fetchCryptoMcAndPrice = (data, symbol) => {
+    let arr = [];
+    let asset = data.filter(asset => asset.symbol === symbol)
+    arr[0] = asset[0]["quote"]["USD"].market_cap
+    arr[1] = asset[0]["quote"]["USD"].price
+    return arr;
+  }
+
+  const fetchStockMcAndPrice = (data, symbol) => {
+    let arr = [];
+    let asset = data.filter(asset => asset.symbol === symbol)[0]
+    arr[0] = asset.marketcap
+    arr[1] = asset.price
+    return arr;
+  }
+  
+  const [assetA, setAssetAState] = useState('ETH');
+  const [assetB, setAssetBState] = useState('BTC');
   const [marketCapA, setmarketCapAState] = useState('');
-  const [marketCapB, setmarketCapBState] = useState('');
-  const [priceA, setPriceAState] = useState('');
+  const [marketCapB, setmarketCapBState] = useState("");
+  const [priceA, setPriceAState] = useState("");
   const [priceB, setPriceBState] = useState('');
-  const [newPrice, setNewPrice] = useState(0);
+  const [newPrice, setNewPrice] = useState();
   const [cryptoNameArr, setCryptoNameArr] = useState([]);
   const [stockNameArr, setStockNameArr] = useState([]);
   const [investmentStr, setinvestmentStr] = useState([]);
   const [investmentAmount, setinvestmentAmount] = useState([]);
-  
+
+  const isFirstRender = useRef(true);
+
+/*    
+      setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0]);
+      setmarketCapBState(fetchCryptoMcAndPrice(cryptoData, 'BTC').toLocaleString().split(".")[0]);
+      setPriceAState(fetchCryptoMcAndPrice(cryptoData, 'ETH')[1].toLocaleString());
+      setNewPrice((fetchCryptoMcAndPrice(cryptoData, 'BTC')[0] / fetchCryptoMcAndPrice(cryptoData, 'ETH')[0] * fetchCryptoMcAndPrice(cryptoData, 'ETH')[1]).toLocaleString().slice(0, -1));
+  */
+  useEffect(() => {
+    setTimeout(() => {
+      setmarketCapAState(fetchCryptoMcAndPrice(cryptoData, 'ETH').toLocaleString().split(".")[0])
+      setmarketCapBState(fetchCryptoMcAndPrice(cryptoData, 'BTC').toLocaleString().split(".")[0])
+      setPriceAState(fetchCryptoMcAndPrice(cryptoData, 'ETH')[1].toLocaleString().slice(0, -1));
+      setNewPrice((fetchCryptoMcAndPrice(cryptoData, 'BTC')[0] / fetchCryptoMcAndPrice(cryptoData, 'ETH')[0] * fetchCryptoMcAndPrice(cryptoData, 'ETH')[1]).toLocaleString().slice(0, -1));
+    }, 300)
+
+    }, [cryptoData, marketCapA]);
+
+
   if (window.screen.width > 768) {
     return <Redirect to={{ pathname: '/main' }} />
   }
@@ -56,23 +92,6 @@ function MobileHome() {
       setAssetAState(asset[0].symbol);
     }
   }  
-    
-  //fetches marketcap and price from crypto data
-  const fetchCryptoMcAndPrice = (data, symbol) => {
-    let arr = [];
-    let asset = data.filter(asset => asset.symbol === symbol)
-    arr[0] = asset[0]["quote"]["USD"].market_cap
-    arr[1] = asset[0]["quote"]["USD"].price
-    return arr;
-  }
-
-  const fetchStockMcAndPrice = (data, symbol) => {
-    let arr = [];
-    let asset = data.filter(asset => asset.symbol === symbol)[0]
-    arr[0] = asset.marketcap
-    arr[1] = asset.price
-    return arr;
-  }
 
   //sets data points for bottom text. Takes in an integer array [marketcap, price]
   const setCryptoDataPoints = (dataArr) => {
