@@ -11,14 +11,14 @@ if (!showBanner) {
 return null;
 }
   
-  if (document.cookie.indexOf("myCookie") !== -1) {
+  if (document.cookie.indexOf("cookieUse") !== -1) {
     handleClose();
 }
 const SetCookieButton = () => {
     // set the cookie with a expiration date of one week from now
     let date = new Date();
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-    document.cookie = "myCookie=value; expires=" + date.toGMTString();
+    document.cookie = "cookieUse=agreed; expires=" + date.toGMTString();
 }
   
 return (
