@@ -159,7 +159,8 @@ function MobileHome() {
 
     dispatch(sessionActions.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }))
     }
-        console.log(document.cookie["myCookie"])
+      
+  console.log(document.cookie.indexOf("myCookie") !== -1)
 
   return (
     <div className="w-screen">

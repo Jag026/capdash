@@ -11,6 +11,9 @@ if (!showBanner) {
 return null;
 }
   
+  if (document.cookie.indexOf("myCookie") !== -1) {
+    handleClose();
+}
 const SetCookieButton = () => {
     // set the cookie with a expiration date of one week from now
     let date = new Date();
