@@ -105,7 +105,7 @@ function MobileHome() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA && assetA !== "ETH") {
+    if (assetA && assetA !== "ETH" && !firstTime) {
       (async () => {
         await setmarketCapBState(cryptoFormatter(market_cap));
         await setPriceBState(cryptoFormatter(price))
@@ -119,6 +119,7 @@ function MobileHome() {
     } else {
       setmarketCapAState(cryptoFormatter(market_cap))
       setPriceAState(cryptoFormatter(price))
+      setFirstTime(false);
       return;
     }
 
@@ -128,7 +129,7 @@ function MobileHome() {
     setNewPrice(0);
     const market_cap = dataArr[0];
     const price = dataArr[1];
-    if (assetA && assetA !== "ETH" && firstTime) {
+    if (assetA && assetA !== "ETH" && !firstTime) {
       (async () => {
         await  setmarketCapBState(stockFormatter(market_cap))
         await setPriceBState(stockFormatter(price))
@@ -142,7 +143,7 @@ function MobileHome() {
       } else {
       setmarketCapAState(stockFormatter(market_cap))
       setPriceAState(stockFormatter(price))
-      setFirstTime = false;
+      setFirstTime(false);
       return
     }
   }
@@ -158,7 +159,8 @@ function MobileHome() {
 
     dispatch(sessionActions.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }))
     }
-  
+        console.log(document.cookie["myCookie"])
+
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
