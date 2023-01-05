@@ -10,6 +10,7 @@ import CookiesBanner from './CookiesBanner'
 
 function MobileHome() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
 
   let cryptoData = useSelector(state => state.session.cryptoData);
     if (!cryptoData) {
@@ -33,7 +34,8 @@ function MobileHome() {
   const [investmentStr, setinvestmentStr] = useState([]);
   const [investmentAmount, setinvestmentAmount] = useState([]);
   const [firstTime, setFirstTime] = useState(true);
-  
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
   //fetches marketcap and price from crypto data
   const fetchCryptoMcAndPrice = (data, symbol) => {
     let arr = [];
@@ -148,6 +150,10 @@ function MobileHome() {
     }
   }
 
+  const checkUser = () => {
+    console.log(sessionUser)
+    return <Redirect to="/login" />;
+  }
     
   const LogData = () => {
     const asset_a = assetA;
@@ -160,8 +166,6 @@ function MobileHome() {
     dispatch(sessionActions.addLog({ asset_a, asset_b, asset_a_price, asset_b_price, asset_a_marketcap, asset_b_marketcap }))
     }
       
-  console.log(document.cookie.indexOf("myCookie") !== -1)
-
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
