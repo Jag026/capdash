@@ -6,7 +6,6 @@ import cryptoFormatter from './CryptoFormatter.js'
 import stockFormatter from './StockFormatter.js'
 import CookiesBanner from './CookiesBanner'
 
-//import './style.css'
 
 function MobileHome() {
   const dispatch = useDispatch();
@@ -151,8 +150,9 @@ function MobileHome() {
   }
 
   const checkUser = () => {
-    console.log(sessionUser)
-    return <Redirect to="/login" />;
+    //console.log(sessionUser)
+    //return <Redirect to="/login" />;
+    window.location = '/login';
   }
     
   const LogData = () => {
@@ -175,7 +175,7 @@ function MobileHome() {
       <div className="flex items-center justify-center my-16">
         <div>
           <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Reset</button>
-          <button onClick={LogData} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>
+          <button onClick={checkUser} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>
         </div>
       </div>
 

@@ -27,13 +27,15 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
   return (
-    <form onSubmit={handleSubmit} className="mt-20 mx-20 text-xl">
+    <div>
+     <h2 className="text-white mt-20 text-6xl mx-20">Sign Up <a href="/login" className="text-blue-600 text-xl mx-4">Or Click Here To Login</a></h2>
+     <form onSubmit={handleSubmit} className="mt-20 mx-20 text-xl">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <div className="text-white flex flex-col">
       <label className="m-3">
-        Email
+        <span className="text-4xl">Email</span>
         <input
           type="text"
           value={email}
@@ -43,7 +45,7 @@ function SignupFormPage() {
         />
       </label>
       <label className="m-3">
-        Username
+        <span className="text-4xl">Username</span>
         <input
           type="text"
           value={username}
@@ -53,7 +55,7 @@ function SignupFormPage() {
         />
       </label>
       <label className="m-3">
-        Password
+        <span className="text-4xl">Password</span>
         <input
           type="password"
           value={password}
@@ -63,7 +65,7 @@ function SignupFormPage() {
         />
       </label>
       <label className="m-3">
-        Confirm Password
+        <span className="text-4xl">Confirm Password</span>
         <input
           type="password"
           value={confirmPassword}
@@ -73,8 +75,9 @@ function SignupFormPage() {
         />
       </label>
       </div>
-      <button type="submit" className="bg-white m-4 p-1">Sign Up</button>
-    </form>
+      <button type="submit" className="text-white bg-blue-7 mt-8 w-40 text-3xl p-3">Sign Up</button>
+     </form>
+    </div>
   );
 }
 
