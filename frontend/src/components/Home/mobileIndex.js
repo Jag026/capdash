@@ -149,13 +149,10 @@ function MobileHome() {
     }
   }
 
-  const checkUser = () => {
-    //console.log(sessionUser)
-    //return <Redirect to="/login" />;
-    window.location = '/login';
-  }
-    
   const LogData = () => {
+    if (!sessionUser) {
+      window.location = '/login';
+    }
     const asset_a = assetA;
     const asset_b = assetB;
     const asset_a_price = priceA;
@@ -175,7 +172,7 @@ function MobileHome() {
       <div className="flex items-center justify-center my-16">
         <div>
           <button onClick={ResetDataPoints} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Reset</button>
-          <button onClick={checkUser} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>
+          <button onClick={LogData} className="bg-lime-300 hover:bg-neutral-500 text-blue-7 font-bold mx-10 w-64 h-24 text-5xl mb-10">Log Data</button>
         </div>
       </div>
 
